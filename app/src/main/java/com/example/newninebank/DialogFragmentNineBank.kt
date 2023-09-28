@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.newninebank.databinding.DialogDesignBinding
 import com.example.newninebank.model.NineBankViewModel
 
-class DialogFragmentNineBank(val value: String) : DialogFragment() {
+class DialogFragmentNineBank(val value: String,val isANumber:Boolean) : DialogFragment() {
     private var _binding: DialogDesignBinding? = null
     private val binding get() = _binding!!
     private val sharedViewModel: NineBankViewModel by activityViewModels()
@@ -23,13 +23,16 @@ class DialogFragmentNineBank(val value: String) : DialogFragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.dialog_design, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.apply {
             viewModel = sharedViewModel
         }
-        val transferValue = binding.dialogEditText
 
+        val transferValue = binding.dialogEditText
+        if (isANumber){
+            transferValue.inputType =0x00002002
+
+        }
 
         binding.dialogButtonContinue.setOnClickListener {
             if (!transferValue.text.isNullOrBlank()) {

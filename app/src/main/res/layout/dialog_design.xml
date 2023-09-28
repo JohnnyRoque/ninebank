@@ -8,14 +8,19 @@
             type="com.example.newninebank.model.NineBankViewModel" />
     </data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
+        style="@style/MaterialAlertDialog.Material3"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:padding="20dp"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
         android:orientation="vertical"
         >
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/transfer_value"
             />
@@ -31,7 +36,6 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_edit_text"
-                android:inputType="numberDecimal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                  />
@@ -41,9 +45,11 @@
         <com.google.android.material.button.MaterialButton
                 android:id="@+id/dialog_button_continue"
                 android:layout_width="wrap_content"
-                android:text="Continuar"
+                android:text="@string/continue_text"
                 android:layout_gravity="end"
                 android:layout_height="wrap_content"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-</layout>
+    </com.google.android.material.card.MaterialCardView>
+</layout
+    >

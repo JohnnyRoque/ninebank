@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">NewNine\nBank</string>
+    <string name="open_account_text">Open account</string>
+    <string name="enter_account_text">Enter account</string>
+    <string name="continue_text">Continue</string>
     <string name="recharge_phone_text">Recharge\nPhone</string>
     <string name="payments_text">Payments</string>
     <string name="pix_text">PIX</string>
@@ -8,9 +11,6 @@
     <string name="transfer_text">Transfer</string>
     <string name="financial_statement">Financial\nstatement</string>
     <string name="investments_text">Investments</string>
-
-
-
     <string name="hello_user">Hello, %1$s</string>
     <string name="navigate_up_text">Back</string>
     <string name="current_bill_text">Current bill\n%1$s</string>

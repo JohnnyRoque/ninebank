@@ -45,6 +45,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
     fun createMaterialDialog(value: String) {
-        DialogFragmentNineBank(value).show(parentFragmentManager, "dialogF")
+        DialogFragmentNineBank(value,true).show(parentFragmentManager, "dialogF")
     }
 }
