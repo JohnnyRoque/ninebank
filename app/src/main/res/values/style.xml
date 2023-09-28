@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="textStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+    </style>
+
+
+    <style name="FloatingActionButtonStyleNinebank" parent="@style/Widget.Material3.FloatingActionButton.Secondary">
+        <item name="cornerFamily">rounded</item>
+        <item name="elevation">2dp</item>
+        <item name="shapeAppearance">?attr/borderRound</item>
+    </style>
+
+
+
+</resources>

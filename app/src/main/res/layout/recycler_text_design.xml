@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/text_material_card"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.Material3.CardView.Filled"
+    android:layout_width="320dp"
+    android:clickable="true"
+    android:background="?attr/selectableItemBackground"
+    android:layout_margin="8dp"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/material_text_id"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/ninebank_slogan"
+        android:textSize="16sp" />
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/transaction_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/baseline_attach_money_24"
+        app:layout_constraintBottom_toTopOf="@id/button_design_divider"
+        app:layout_constraintEnd_toStartOf="@id/transaction_content_textview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/type_of_transaction_textview"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_height="wrap_content"
+        android:text="@string/credit_card_text"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/transaction_content_textview"
+        app:layout_constraintStart_toEndOf="@id/transaction_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/transaction_content_textview"
+        android:textAllCaps="true"
+        android:text="@string/credit_card_text"
+        app:layout_constraintStart_toEndOf="@id/transaction_image"
+        app:layout_constraintBottom_toTopOf="@id/transaction_value_textview"
+        android:layout_width="wrap_content"
+        android:textSize="14sp"
+        android:layout_height="wrap_content"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/transaction_value_textview"
+        android:layout_width="wrap_content"
+        android:text="@string/credit_card_text"
+        android:layout_marginBottom="6dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/button_design_divider"
+        app:layout_constraintStart_toEndOf="@id/transaction_image"
+        android:textAllCaps="true"
+        android:layout_height="wrap_content"
+         />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/button_design_divider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

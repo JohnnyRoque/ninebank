@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">NewNine\nBank</string>
+    <string name="hello_user">Hello, %1$s</string>
+    <string name="navigate_up_text">Back</string>
+    <string name="current_bill_text">Current bill\n%1$s</string>
+    <string name="month_transactions_text">\tMonth\'s Transactions</string>
+    <string name="saved_value_text">\tSaved value: %1$s</string>
+    <string name="account_income_text">\tTotal account income +%1$s this month</string>
+    <string name="available_limit_text">Available limit:%1$s </string>
+    <string name="credit_card_text">Credit Card</string>
+    <string name="account_currency_text">Account\n%1$s</string>
+    <string name="available_balance_title">Available Balance\n%1$s</string>
+    <string name="available_balance_dialog">Available Balance %1$s</string>
+    <string name="history_text">History</string>
+    <string name="search_text">Search</string>
+    <string name="ninebank_slogan">Ninebank. Together we make the world a better place.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_card">my cards</string>
+    <string name="transfer_value">Qual o valor da transferência?</string>
+</resources>

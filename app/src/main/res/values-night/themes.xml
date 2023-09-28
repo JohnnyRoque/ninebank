@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="Base.Theme.NewNineBank" parent="Theme.Material3.DayNight.NoActionBar">
+
+    </style>
+    <style name="Theme.NewNineBank" parent="Base.Theme.NewNineBank" />
+
+</resources>

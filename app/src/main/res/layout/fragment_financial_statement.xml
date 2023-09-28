@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.newninebank.model.NineBankViewModel" />
+
+        <variable
+            name="transactionHistoryRecycler"
+            type="com.example.newninebank.TransactionHistoryRecycler" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
+            app:layout_insetEdge="top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/appbar_fs"
+                app:navigationContentDescription="@string/navigate_up_text"
+                app:navigationIcon="@drawable/baseline_arrow_back_ios_new_24"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_dodgeInsetEdges="top"
+            tools:context=".FinancialStatementFragment">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/available_balance_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@{@string/available_balance_title(viewModel.accountCurrency)}"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/month_transactions_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:drawableStart="@drawable/baseline_arrow_forward_ios_24"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:padding="12dp"
+                android:text="@string/month_transactions_text"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                app:autoSizeMaxTextSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/available_balance_textview" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/saved_value_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:drawableStart="@drawable/baseline_arrow_forward_ios_24"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:padding="12dp"
+                android:text="@{@string/saved_value_text(viewModel.savedMoney)}"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                app:autoSizeMaxTextSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/month_transactions_textview" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/total_account_income_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:drawableStart="@drawable/baseline_arrow_forward_ios_24"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:padding="12dp"
+                android:text="@{@string/account_income_text(viewModel.incomeValue)}"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                app:autoSizeMaxTextSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/saved_value_textview" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_financial_statement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/total_account_income_textview" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/History_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/history_text"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintTop_toBottomOf="@id/divider_financial_statement" />
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/search_bar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/History_textview">
+
+                <com.google.android.material.search.SearchBar
+                    android:id="@+id/search_bar_fs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/search_text" />
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:adapter="@{transactionHistoryRecycler}"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                android:text="@string/hello_blank_fragment"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_bar_layout"
+                app:layout_constraintVertical_bias="1.0"
+                tools:listitem="@layout/transaction_history_design" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
