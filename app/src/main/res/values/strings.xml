@@ -2,6 +2,7 @@
     <string name="app_name">NewNine\nBank</string>
     <string name="open_account_text">Open account</string>
     <string name="enter_account_text">Enter account</string>
+    <string name="cancel_text">Cancel</string>
     <string name="continue_text">Continue</string>
     <string name="recharge_phone_text">Recharge\nPhone</string>
     <string name="payments_text">Payments</string>

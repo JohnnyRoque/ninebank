@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import com.example.newninebank.DialogFragmentNineBank.Companion.DIALOGFRAGMENT
 import com.example.newninebank.databinding.FragmentHomeBinding
 import com.example.newninebank.model.NineBankViewModel
 
 
 
-const val TAG ="TestTag"
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
     }
-    fun createMaterialDialog(value: String) {
-        DialogFragmentNineBank(value,true,null,viewLifecycleOwner).show(parentFragmentManager, "dialogF")
+    fun createMaterialDialog() {
+        DialogFragmentNineBank(true,null).show(parentFragmentManager, DIALOGFRAGMENT)
     }
 }

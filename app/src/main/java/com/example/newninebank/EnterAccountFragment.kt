@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import com.example.newninebank.DialogFragmentNineBank.Companion.DIALOGFRAGMENT
 import com.example.newninebank.databinding.FragmentEnterAccountBinding
 import com.example.newninebank.model.NineBankViewModel
 
@@ -36,7 +37,10 @@ class EnterAccountFragment : Fragment() {
             viewModel = sharedViewModel
             enterFragment = this@EnterAccountFragment
             navToFragmentName = "HomeFragment"
+        }
 
+        binding.buttonEnterAccount.setOnClickListener {
+            DialogFragmentNineBank(false,null).show(parentFragmentManager,DIALOGFRAGMENT)
         }
         super.onViewCreated(view, savedInstanceState)
     }

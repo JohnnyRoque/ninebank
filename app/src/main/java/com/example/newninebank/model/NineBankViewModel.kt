@@ -26,8 +26,14 @@ class NineBankViewModel : ViewModel() {
 
     private val _incomeValue = MutableLiveData(0.0)
     val incomeValue: LiveData<SpannableString> = _incomeValue.map {
-        val editado : SpannableString = SpannableString.valueOf(NumberFormat.getCurrencyInstance().format(it))
-        editado.setSpan(StyleSpan(Typeface.BOLD),0,it.toString().lastIndex,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        val editado: SpannableString =
+            SpannableString.valueOf(NumberFormat.getCurrencyInstance().format(it))
+        editado.setSpan(
+            StyleSpan(Typeface.BOLD),
+            0,
+            it.toString().lastIndex,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         editado
 
     }
@@ -70,6 +76,7 @@ class NineBankViewModel : ViewModel() {
         when (navToFragmentName) {
             listOfFragments[0] -> action =
                 HomeFragmentDirections.actionHomeFragmentToFinancialStatementFragment()
+
             listOfFragments[1] -> action =
                 EnterAccountFragmentDirections.actionEnterAccountFragmentToHomeFragment()
         }
@@ -79,7 +86,7 @@ class NineBankViewModel : ViewModel() {
 
 
     fun calSpent(spent: Double) {
-        if ( _accountCurrency.value!! >= spent && spent != 0.0) {
+        if (_accountCurrency.value!! >= spent && spent != 0.0) {
             _accountCurrency.value = _accountCurrency.value!!.minus(spent)
             addToTransactionsHistory(
                 typeOfTransaction = "Transferência enviada",

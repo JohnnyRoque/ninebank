@@ -160,7 +160,7 @@
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:onClick="@{() -> homeFragment.createMaterialDialog(viewModel.accountCurrency)}"
+                android:onClick="@{() -> homeFragment.createMaterialDialog()}"
                 android:text="@string/my_card"
                 android:textAlignment="textStart"
                 android:textAppearance="?attr/textAppearanceButton"
