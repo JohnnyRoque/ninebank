@@ -23,8 +23,9 @@ class NineBankViewModel : ViewModel() {
     val testMoney: LiveData<String> = _testMoney.map {
         NumberFormat.getCurrencyInstance().format(it)
     }
-
     private val _incomeValue = MutableLiveData(0.0)
+
+    /** TEST TEST */
     val incomeValue: LiveData<SpannableString> = _incomeValue.map {
         val editado: SpannableString =
             SpannableString.valueOf(NumberFormat.getCurrencyInstance().format(it))
@@ -35,7 +36,6 @@ class NineBankViewModel : ViewModel() {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         editado
-
     }
 
     private val _savedMoney = MutableLiveData(0.0)
@@ -65,7 +65,6 @@ class NineBankViewModel : ViewModel() {
         return _transactionHistoryList.value!!.toList()
     }
 
-
     private val _userName = MutableLiveData("John")
     val userName: LiveData<String> = _userName
 
@@ -80,10 +79,8 @@ class NineBankViewModel : ViewModel() {
             listOfFragments[1] -> action =
                 EnterAccountFragmentDirections.actionEnterAccountFragmentToHomeFragment()
         }
-
         return findNavController(fragment).navigate(action)
     }
-
 
     fun calSpent(spent: Double) {
         if (_accountCurrency.value!! >= spent && spent != 0.0) {
