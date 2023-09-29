@@ -1,30 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_margin="16dp"
-    android:layout_height="match_parent"
-    tools:context=".OpenAccountFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/open_account_title_textview"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.newninebank.model.NineBankViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/open_account_title"
-        android:textAppearance="?attr/textAppearanceTitleMedium"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        tools:context=".OpenAccountFragment">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/open_account_name_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/open_account_name"
-        android:textAppearance="?attr/textAppearanceSubtitle1"
-        app:layout_constraintTop_toBottomOf="@id/open_account_title_textview"
-        tools:layout_editor_absoluteX="0dp" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/open_account_title_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/open_account_title"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/open_account_recycler"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/open_account_title_textview" />
+
+
+        <!--    <com.google.android.material.textview.MaterialTextView-->
+        <!--        android:id="@+id/open_account_name_textview"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginTop="50dp"-->
+        <!--        android:text="@string/open_account_name"-->
+        <!--        android:textAppearance="?attr/textAppearanceSubtitle1"-->
+        <!--        app:layout_constraintTop_toBottomOf="@id/open_account_title_textview"-->
+        <!--        tools:layout_editor_absoluteX="0dp" />-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

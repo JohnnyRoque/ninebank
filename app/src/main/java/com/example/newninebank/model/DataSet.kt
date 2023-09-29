@@ -21,6 +21,15 @@ class DataSet {
         return listOf(
             DataModel(R.string.ninebank_slogan),
             DataModel(R.string.ninebank_slogan),
-            DataModel(R.string.ninebank_slogan))
+            DataModel(R.string.ninebank_slogan)
+        )
+    }
+
+    fun loadTextsOpenAccount(): List<OpenAccountModel> {
+        return listOf(
+            OpenAccountModel(R.string.open_account_name, R.string.social_name_button_text, true),
+            OpenAccountModel(R.string.open_account_cpf, R.string.social_name_button_text, false)
+        )
+
     }
 }

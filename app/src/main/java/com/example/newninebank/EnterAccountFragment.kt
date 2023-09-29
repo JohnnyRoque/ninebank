@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.newninebank.DialogFragmentNineBank.Companion.DIALOGFRAGMENT
 import com.example.newninebank.databinding.FragmentEnterAccountBinding
 import com.example.newninebank.model.NineBankViewModel
@@ -38,10 +39,11 @@ class EnterAccountFragment : Fragment() {
             enterFragment = this@EnterAccountFragment
             navToFragmentName = "HomeFragment"
         }
-
-        binding.buttonEnterAccount.setOnClickListener {
-            DialogFragmentNineBank(false,null).show(parentFragmentManager,DIALOGFRAGMENT)
+        binding.buttonOpenAccount.setOnClickListener {
+            val action = EnterAccountFragmentDirections.actionEnterAccountFragmentToOpenAccountFragment()
+            findNavController().navigate(action)
         }
+
         super.onViewCreated(view, savedInstanceState)
     }
 }

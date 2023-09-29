@@ -12,3 +12,9 @@ data class TransactionModel(
     val transactionContent:String,
     val value :String
     )
+
+data class OpenAccountModel(
+    val text: Int,
+    val buttonText: Int?,
+    val haveAButton:Boolean
+)

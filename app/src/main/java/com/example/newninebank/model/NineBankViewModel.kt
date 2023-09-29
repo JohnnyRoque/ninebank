@@ -58,8 +58,7 @@ class NineBankViewModel : ViewModel() {
         NumberFormat.getCurrencyInstance().format(it)
     }
 
-    private val _transactionHistoryList =
-        MutableLiveData<MutableList<TransactionModel>>(mutableListOf())
+    private val _transactionHistoryList = MutableLiveData<MutableList<TransactionModel>>(mutableListOf())
 
     fun transformList(): List<TransactionModel> {
         return _transactionHistoryList.value!!.toList()

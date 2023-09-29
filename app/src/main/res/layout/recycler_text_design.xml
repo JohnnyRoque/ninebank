@@ -3,20 +3,42 @@
     android:id="@+id/text_material_card"
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/Widget.Material3.CardView.Filled"
-    android:layout_width="320dp"
+    android:layout_width="wrap_content"
     android:clickable="true"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="20dp"
     android:background="?attr/selectableItemBackground"
-    android:layout_margin="8dp"
     android:layout_gravity="center"
     android:layout_height="wrap_content">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/material_text_id"
-        android:padding="20dp"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/ninebank_slogan"
-        android:textSize="16sp" />
+        android:layout_margin="8dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/material_text_id"
+            android:layout_marginHorizontal="8dp"
+            android:layout_width="match_parent"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:layout_marginVertical="12dp"
+            android:layout_height="wrap_content"
+            android:text="@string/open_account_name"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_social_name"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_gravity="start"
+            android:text="@string/social_name_button_text"
+            android:textAppearance="?attr/textAppearanceButton" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </com.google.android.material.card.MaterialCardView>

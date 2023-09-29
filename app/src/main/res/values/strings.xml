@@ -25,7 +25,7 @@
     <string name="available_balance_dialog">Available Balance %1$s</string>
     <string name="history_text">History</string>
     <string name="search_text">Search</string>
-    <string name="ninebank_slogan">Ninebank. Together we make the world a better place.</string>
+    <string name="ninebank_slogan">Ninebank. Together we make the\nworld a better place.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="open_account_title">Hello, opening your NineBank account is quick and safe. And we\'ll help you every step of the way.</string>
