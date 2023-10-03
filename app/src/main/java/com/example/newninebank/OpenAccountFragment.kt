@@ -13,6 +13,7 @@ import com.example.newninebank.model.NineBankViewModel
 class OpenAccountFragment : Fragment() {
     private var _binding : FragmentOpenAccountBinding? = null
     val binding get() = _binding!!
+    lateinit var recyclerChat : TextRecyclerView
     private val sharedViewModel : NineBankViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -28,8 +29,11 @@ class OpenAccountFragment : Fragment() {
         binding.apply {
             viewModel = sharedViewModel
             lifecycleOwner = viewLifecycleOwner
-            openAccountRecyclerAdapter = TextRecyclerView(requireContext(), dataSetOpenAccount = binding.viewModel!!.openAccountChatList.value)
-            userName = binding.editTextChatInput.text.toString()
+        }
+        setupRecycler()
+        sharedViewModel.openAccountChatList.observe(viewLifecycleOwner){
+            recyclerChat.asyncDiff.submitList(it)
+
         }
 
         binding.buttonSend.setOnClickListener {
@@ -39,7 +43,12 @@ class OpenAccountFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
     }
+fun setupRecycler(){
+    recyclerChat = TextRecyclerView(requireContext())
+    binding.openAccountRecycler.adapter = recyclerChat
 
+
+}
 
 
 }

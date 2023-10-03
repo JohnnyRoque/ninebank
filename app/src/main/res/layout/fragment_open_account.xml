@@ -9,15 +9,6 @@
         <variable
             name="viewModel"
             type="com.example.newninebank.model.NineBankViewModel" />
-
-        <variable
-            name="openAccountRecyclerAdapter"
-            type="com.example.newninebank.TextRecyclerView" />
-        <variable
-            name="userName"
-            type="String" />
-
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +24,6 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="16dp"
             android:overScrollMode="never"
-            android:adapter="@{openAccountRecyclerAdapter}"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/layout_user_input"
             app:layout_constraintTop_toTopOf="parent" />
