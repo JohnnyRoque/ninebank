@@ -14,7 +14,8 @@ data class TransactionModel(
     )
 
 data class OpenAccountModel(
-    val text: Int,
-    val buttonText: Int?,
-    val haveAButton:Boolean
+    val text: Int?,
+    var buttonText: Int?,
+    val haveAButton:Boolean,
+    var userText: String =""
 )

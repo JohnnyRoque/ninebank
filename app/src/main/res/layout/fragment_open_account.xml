@@ -5,37 +5,77 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.newninebank.model.NineBankViewModel" />
+
+        <variable
+            name="openAccountRecyclerAdapter"
+            type="com.example.newninebank.TextRecyclerView" />
+        <variable
+            name="userName"
+            type="String" />
+
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
         tools:context=".OpenAccountFragment">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/open_account_title_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/open_account_title"
-            android:textAppearance="?attr/textAppearanceTitleMedium"
-            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/open_account_recycler"
-            android:overScrollMode="never"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/open_account_title_textview" />
+            android:layout_marginHorizontal="16dp"
+            android:overScrollMode="never"
+            android:adapter="@{openAccountRecyclerAdapter}"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/layout_user_input"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/layout_user_input"
+            android:layout_width="match_parent"
+
+            app:shapeAppearance="@style/RoundcornerEditText"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/user_input_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/edit_text_chat_input"
+                        style="@style/Widget.Material3.TextInputEditText.FilledBox"
+                        android:layout_width="330dp"
+                        android:hint="@string/open_account_enter_email"
+                        android:inputType="textPersonName"
+                        android:layout_height="match_parent"
+                        android:autofillHints="name" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/button_send"
+                    android:layout_marginEnd="8dp"
+                    app:shapeAppearance="@style/FloatingActionButtonStyleNinebank"
+                    android:layout_width="wrap_content"
+                    app:elevation="1dp"
+                    android:src="@drawable/send_48px"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/send_text" />
+
+        </com.google.android.material.card.MaterialCardView>
 
         <!--    <com.google.android.material.textview.MaterialTextView-->
         <!--        android:id="@+id/open_account_name_textview"-->

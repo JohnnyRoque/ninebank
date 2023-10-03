@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="RoundcornerEditText">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+
+
+    </style>
+
+
     <style name="textStyle">
         <item name="android:textStyle">bold</item>
         <item name="fontFamily">@font/roboto_medium</item>

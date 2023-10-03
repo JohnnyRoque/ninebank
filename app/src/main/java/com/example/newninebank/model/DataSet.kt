@@ -25,11 +25,5 @@ class DataSet {
         )
     }
 
-    fun loadTextsOpenAccount(): List<OpenAccountModel> {
-        return listOf(
-            OpenAccountModel(R.string.open_account_name, R.string.social_name_button_text, true),
-            OpenAccountModel(R.string.open_account_cpf, R.string.social_name_button_text, false)
-        )
 
-    }
 }

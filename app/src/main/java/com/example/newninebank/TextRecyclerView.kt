@@ -35,14 +35,18 @@ class TextRecyclerView(
         } else {
             dataSetOpenAccount.size
         }
-
     }
 
     override fun onBindViewHolder(holder: TextRecyclerViewHolder, position: Int) {
         when {
+
             !dataSetOpenAccount.isNullOrEmpty() -> {
                 val item = dataSetOpenAccount[position]
-                holder.materialText.text = context.getText(item.text)
+                if(item.text == null){
+                    holder.materialText.text = item.userText
+                }else {
+                    holder.materialText.text = item.text.let { context.getText(it) }
+                }
                 if (item.haveAButton) {
                     holder.materialButton.visibility = VISIBLE
                     holder.materialButton.setText(item.buttonText!!)
@@ -54,7 +58,5 @@ class TextRecyclerView(
                 holder.materialText.text = context.getText(item.name)
             }
         }
-
-
     }
 }

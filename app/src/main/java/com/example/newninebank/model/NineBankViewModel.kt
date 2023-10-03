@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.newninebank.EnterAccountFragmentDirections
 import com.example.newninebank.HomeFragmentDirections
 import com.example.newninebank.R
+import com.example.newninebank.TAG
 import java.text.NumberFormat
 
 class NineBankViewModel : ViewModel() {
@@ -58,14 +59,46 @@ class NineBankViewModel : ViewModel() {
         NumberFormat.getCurrencyInstance().format(it)
     }
 
-    private val _transactionHistoryList = MutableLiveData<MutableList<TransactionModel>>(mutableListOf())
+    private val _userName = MutableLiveData<String>()
+    val userName: LiveData<String> = _userName.map { s ->
+        var formattedName = s
+        if (s.first().isLowerCase()) {
+            formattedName = s.replaceFirstChar { it.uppercase() }
+        }
+        formattedName
+    }
+
+    private val _transactionHistoryList =
+        MutableLiveData<MutableList<TransactionModel>>(mutableListOf())
+
+
+    private val loadTextsOpenAccount = mutableListOf(
+        OpenAccountModel(R.string.hello_text, null, false),
+        OpenAccountModel(R.string.welcome_text, null, false),
+        OpenAccountModel(R.string.open_account_title, null, false),
+        OpenAccountModel(R.string.open_account_name, R.string.social_name_button_text, true),
+    )
+
+    private val _openAccountChatList = MutableLiveData<MutableList<OpenAccountModel>>(
+        mutableListOf(
+            OpenAccountModel(R.string.hello_text, null, false),
+            OpenAccountModel(R.string.welcome_text, null, false),
+            OpenAccountModel(R.string.open_account_title, null, false),
+            OpenAccountModel(R.string.open_account_name, R.string.social_name_button_text, true),
+        )
+    )
+    val openAccountChatList: LiveData<MutableList<OpenAccountModel>> = _openAccountChatList
+
+    fun getUserName(name: String) {
+        _userName.value = name
+        _openAccountChatList.value?.add(OpenAccountModel(null, null, false, name))
+        Log.d(TAG, loadTextsOpenAccount.size.toString())
+    }
 
     fun transformList(): List<TransactionModel> {
         return _transactionHistoryList.value!!.toList()
     }
 
-    private val _userName = MutableLiveData("John")
-    val userName: LiveData<String> = _userName
 
     fun onClickNavigate(fragment: Fragment, navToFragmentName: String) {
         lateinit var action: NavDirections

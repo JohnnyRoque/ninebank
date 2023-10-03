@@ -27,10 +27,12 @@
     <string name="search_text">Search</string>
     <string name="ninebank_slogan">Ninebank. Together we make the\nworld a better place.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="open_account_title">Hello, opening your NineBank account is quick and safe. And we\'ll help you every step of the way.</string>
+    <string name="hello_text">Hello,&#128513;</string>
+    <string name="welcome_text">Welcome to NineBank!</string>
+    <string name="open_account_enter_email">Enter an e-mail…</string>
+    <string name="open_account_title">Opening your an account is quick and safe. And we\'ll help you every step of the way.</string>
     <string name="open_account_name">First, what is your name?</string>
-    <string name="social_name_button_text">(I want to use my social name)</string>
+    <string name="social_name_button_text">I want to use my social name </string>
     <string name="open_account_cpf">NineBank accounts (personal and business) are always linked to your CPF, please enter your CPF.</string>
     <string name="open_account_terms_text">To continue, you need to read our Terms of Use and Privacy Policy.</string>
     <string name="open_account_types_of_account">Now that you know more about NineBank, select the type of personal account that best suits you.</string>
@@ -42,4 +44,5 @@
 
     <string name="my_card">my cards</string>
     <string name="transfer_value">Qual o valor da transferência?</string>
+    <string name="send_text">send</string>
 </resources>

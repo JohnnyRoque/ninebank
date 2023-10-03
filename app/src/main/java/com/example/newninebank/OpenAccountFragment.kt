@@ -1,20 +1,19 @@
 package com.example.newninebank
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.newninebank.databinding.FragmentOpenAccountBinding
-import com.example.newninebank.model.DataSet
 import com.example.newninebank.model.NineBankViewModel
 
 class OpenAccountFragment : Fragment() {
-    var _binding : FragmentOpenAccountBinding? = null
+    private var _binding : FragmentOpenAccountBinding? = null
     val binding get() = _binding!!
-    val sharedViewModel : NineBankViewModel by activityViewModels()
+    private val sharedViewModel : NineBankViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,8 +27,19 @@ class OpenAccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.apply {
             viewModel = sharedViewModel
+            lifecycleOwner = viewLifecycleOwner
+            openAccountRecyclerAdapter = TextRecyclerView(requireContext(), dataSetOpenAccount = binding.viewModel!!.openAccountChatList.value)
+            userName = binding.editTextChatInput.text.toString()
         }
-        binding.openAccountRecycler.adapter = TextRecyclerView(requireContext(), dataSetOpenAccount = DataSet().loadTextsOpenAccount())
+
+        binding.buttonSend.setOnClickListener {
+            sharedViewModel.getUserName(binding.editTextChatInput.text.toString())
+        }
+
+
         super.onViewCreated(view, savedInstanceState)
     }
+
+
+
 }
