@@ -9,6 +9,10 @@
         <variable
             name="viewModel"
             type="com.example.newninebank.model.NineBankViewModel" />
+        <variable
+            name="textRecyclerAdapter"
+            type="com.example.newninebank.TextRecyclerView" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +25,7 @@
             android:id="@+id/open_account_recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:adapter="@{textRecyclerAdapter}"
             android:orientation="vertical"
             android:layout_marginHorizontal="16dp"
             android:overScrollMode="never"

@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.newninebank.EnterAccountFragmentDirections
 import com.example.newninebank.HomeFragmentDirections
 import com.example.newninebank.R
+import com.example.newninebank.TextRecyclerView
 import java.text.NumberFormat
 
 class NineBankViewModel : ViewModel() {
@@ -78,13 +79,17 @@ class NineBankViewModel : ViewModel() {
         OpenAccountModel(R.string.open_account_name, R.string.social_name_button_text, true),
     )
 
-    private val _openAccountChatList : MutableLiveData<List<OpenAccountModel>> = MutableLiveData()
-
+    private val _openAccountChatList: MutableLiveData<List<OpenAccountModel>> = MutableLiveData()
     val openAccountChatList: LiveData<List<OpenAccountModel>> = _openAccountChatList
+    private val listOfNames = mutableListOf<OpenAccountModel>()
+
+
 
     fun getUserName(name: String) {
         _userName.value = name
-        _openAccountChatList.value = listOf(OpenAccountModel(null, null, false, name))
+        listOfNames.add(OpenAccountModel(null, null, false, name))
+        _openAccountChatList.postValue(listOfNames)
+
     }
 
     fun transformList(): List<TransactionModel> {

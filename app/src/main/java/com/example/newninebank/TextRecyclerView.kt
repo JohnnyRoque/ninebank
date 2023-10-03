@@ -15,7 +15,6 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 
 class TextRecyclerView(
-    private val context: Context,
     private val dataSetList: List<DataModel> = DataSet().loadTexts(),
 ) : RecyclerView.Adapter<TextRecyclerView.TextRecyclerViewHolder>() {
     val asyncDiff = AsyncListDiffer(this, object : DiffUtil.ItemCallback<OpenAccountModel>() {
@@ -56,7 +55,7 @@ class TextRecyclerView(
         if (item.text == null) {
             holder.materialText.text = item.userText
         } else {
-            holder.materialText.text = item.text.let { context.getText(it) }
+            holder.materialText.setText(item.text)
         }
         if (item.haveAButton) {
             holder.materialButton.visibility = VISIBLE
