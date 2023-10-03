@@ -12,10 +12,12 @@ import com.example.newninebank.databinding.FragmentOpenAccountBinding
 import com.example.newninebank.model.NineBankViewModel
 
 class OpenAccountFragment : Fragment() {
+
     private var _binding: FragmentOpenAccountBinding? = null
     val binding get() = _binding!!
     private lateinit var recyclerChat: TextRecyclerView
     private val sharedViewModel: NineBankViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +30,8 @@ class OpenAccountFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        sharedViewModel.loadTextsOpenAccount()
         recyclerChat = TextRecyclerView()
 
         binding.apply {
@@ -36,13 +40,8 @@ class OpenAccountFragment : Fragment() {
             textRecyclerAdapter = recyclerChat
         }
         sharedViewModel.openAccountChatList.observe(viewLifecycleOwner) {
-            Log.d(TAG, "observer")
-            Log.d(TAG, " current Size ${recyclerChat.asyncDiff.currentList.size}")
             recyclerChat.asyncDiff.submitList(it)
-            recyclerChat.notifyItemInserted(it.size +1)
-            Log . d (TAG, " current text ${recyclerChat.asyncDiff.currentList.last().userText}")
-
-
+            recyclerChat.notifyItemInserted(it.size + 1)
         }
 
         binding.buttonSend.setOnClickListener {
