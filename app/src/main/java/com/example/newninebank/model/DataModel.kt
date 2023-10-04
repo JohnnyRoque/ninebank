@@ -17,7 +17,7 @@ data class OpenAccountModel(
     val text: Int?,
     var buttonText: Int?,
     val haveAButton:Boolean,
-    var userText: String =""
+    var userText: String?
 )
 
 

@@ -75,10 +75,10 @@ class NineBankViewModel : ViewModel() {
     fun loadTextsOpenAccount(): MutableList<OpenAccountModel> {
         val textList = mutableListOf<OpenAccountModel>()
         repeat(1) {
-            textList.add(OpenAccountModel(R.string.hello_text, null, false))
-            textList.add(OpenAccountModel(R.string.welcome_text, null, false))
-            textList.add(OpenAccountModel(R.string.open_account_title, null, false))
-            textList.add(OpenAccountModel(R.string.open_account_name, R.string.social_name_button_text, true)) }
+            textList.add(OpenAccountModel(R.string.hello_text, null, false,null))
+            textList.add(OpenAccountModel(R.string.welcome_text, null, false,null))
+            textList.add(OpenAccountModel(R.string.open_account_title, null, false,null))
+            textList.add(OpenAccountModel(R.string.open_account_name, R.string.social_name_button_text, true,null)) }
         _openAccountChatList.postValue(textList)
         return textList
     }

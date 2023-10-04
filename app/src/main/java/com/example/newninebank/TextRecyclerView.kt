@@ -16,7 +16,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 
 class TextRecyclerView(
-    val context: Context
+    private val context: Context
 ) : RecyclerView.Adapter<TextRecyclerView.TextRecyclerViewHolder>() {
     val asyncDiff = AsyncListDiffer(this, object : DiffUtil.ItemCallback<OpenAccountModel>() {
         override fun areItemsTheSame(
@@ -34,10 +34,9 @@ class TextRecyclerView(
         }
 
     })
-
     class TextRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val materialCard: MaterialCardView = view.findViewById(R.id.text_material_card)
-        val materialButton: MaterialButton = view.findViewById(R.id.button_social_name)
+        val materialButton: MaterialButton = view.findViewById(R.id.open_account_user_button)
         val materialText: MaterialTextView = view.findViewById(R.id.material_text_id)
     }
 
@@ -52,6 +51,7 @@ class TextRecyclerView(
     }
 
     override fun onBindViewHolder(holder: TextRecyclerViewHolder, position: Int) {
+
         val layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
@@ -59,21 +59,24 @@ class TextRecyclerView(
             gravity = Gravity.END
         }
 
-
         val item = asyncDiff.currentList[position]
-        if (item.text == null) {
-            holder.materialCard.setCardBackgroundColor(context.resources.getColor(R.color.md_theme_light_primaryContainer))
-            holder.materialCard.layoutParams = layoutParams
-            holder.materialText.text = item.userText.replaceFirstChar {
-                it.uppercaseChar()
-            }
+        when{
+            item.text == null ->  {
+                holder.materialCard.setCardBackgroundColor(context.getColor(R.color.md_theme_light_primaryContainer))
+                holder.materialCard.layoutParams = layoutParams
 
-        } else {
-            holder.materialText.setText(item.text)
+                holder.materialText.text = item.userText.toString().replaceFirstChar {
+                    it.uppercaseChar()
+                }
+            }
+            item.haveAButton -> {
+                holder.materialButton.visibility = VISIBLE
+                holder.materialButton.setText(item.buttonText!!)
+            }
+            else -> holder.materialText.setText(item.text)
+
         }
-        if (item.haveAButton) {
-            holder.materialButton.visibility = VISIBLE
-            holder.materialButton.setText(item.buttonText!!)
-        }
+
+
     }
 }

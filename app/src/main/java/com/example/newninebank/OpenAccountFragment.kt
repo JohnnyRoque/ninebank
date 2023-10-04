@@ -1,10 +1,12 @@
 package com.example.newninebank
 
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -30,6 +32,7 @@ class OpenAccountFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val userInputEditText =binding.editTextChatInput
 
         sharedViewModel.loadTextsOpenAccount()
         recyclerChat = TextRecyclerView(requireContext())
@@ -45,11 +48,18 @@ class OpenAccountFragment : Fragment() {
             Log.d(TAG,recyclerChat.asyncDiff.currentList.size.toString())
         }
 
+        userInputEditText.doAfterTextChanged {
+            verifyUserInput(it!!)
+        }
+
         binding.buttonSend.setOnClickListener {
-            sharedViewModel.getUserName(binding.editTextChatInput.text.toString())
+            sharedViewModel.getUserName(userInputEditText.text.toString())
         }
         super.onViewCreated(view, savedInstanceState)
     }
 
+    private fun verifyUserInput(input: Editable){
+         binding.buttonSend.isEnabled = input.isNotEmpty()
+    }
 
 }

@@ -21,7 +21,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/material_text_id"
             android:layout_marginHorizontal="8dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             android:layout_marginVertical="12dp"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_social_name"
+            android:id="@+id/open_account_user_button"
             android:visibility="gone"
             android:layout_width="wrap_content"
             style="@style/Widget.Material3.Button.OutlinedButton"
