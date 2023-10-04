@@ -32,7 +32,7 @@ class OpenAccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         sharedViewModel.loadTextsOpenAccount()
-        recyclerChat = TextRecyclerView()
+        recyclerChat = TextRecyclerView(requireContext())
 
         binding.apply {
             viewModel = sharedViewModel
@@ -42,6 +42,7 @@ class OpenAccountFragment : Fragment() {
         sharedViewModel.openAccountChatList.observe(viewLifecycleOwner) {
             recyclerChat.asyncDiff.submitList(it)
             recyclerChat.notifyItemInserted(it.size + 1)
+            Log.d(TAG,recyclerChat.asyncDiff.currentList.size.toString())
         }
 
         binding.buttonSend.setOnClickListener {

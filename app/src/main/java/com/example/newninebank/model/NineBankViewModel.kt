@@ -15,7 +15,6 @@ import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.newninebank.EnterAccountFragmentDirections
 import com.example.newninebank.HomeFragmentDirections
 import com.example.newninebank.R
-import com.example.newninebank.TextRecyclerView
 import java.text.NumberFormat
 
 class NineBankViewModel : ViewModel() {
@@ -86,7 +85,6 @@ class NineBankViewModel : ViewModel() {
 
     private val _openAccountChatList: MutableLiveData<List<OpenAccountModel>> = MutableLiveData()
     val openAccountChatList: LiveData<List<OpenAccountModel>> = _openAccountChatList
-    private val listOfNames = mutableListOf<OpenAccountModel>()
 
 
     fun getUserName(name: String) {
@@ -144,5 +142,4 @@ class NineBankViewModel : ViewModel() {
         Log.d("CalSpent", "${_transactionHistoryList.value}")
         return _transactionHistoryList.value!!
     }
-
 }

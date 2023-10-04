@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
             viewModel = sharedViewModel
             lifecycleOwner = viewLifecycleOwner
             buttonRecyclerAdapter = NineBankRecyclerView(requireContext())
-            textRecyclerAdapter = TextRecyclerView()
+            textRecyclerAdapter = TextRecyclerView(requireContext())
             homeFragment = this@HomeFragment
             navToFragmentName = "FinancialStatement"
         }

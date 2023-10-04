@@ -1,21 +1,22 @@
 package com.example.newninebank
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.newninebank.model.DataModel
-import com.example.newninebank.model.DataSet
 import com.example.newninebank.model.OpenAccountModel
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 
 class TextRecyclerView(
-    private val dataSetList: List<DataModel> = DataSet().loadTexts(),
+    val context: Context
 ) : RecyclerView.Adapter<TextRecyclerView.TextRecyclerViewHolder>() {
     val asyncDiff = AsyncListDiffer(this, object : DiffUtil.ItemCallback<OpenAccountModel>() {
         override fun areItemsTheSame(
@@ -35,6 +36,7 @@ class TextRecyclerView(
     })
 
     class TextRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val materialCard: MaterialCardView = view.findViewById(R.id.text_material_card)
         val materialButton: MaterialButton = view.findViewById(R.id.button_social_name)
         val materialText: MaterialTextView = view.findViewById(R.id.material_text_id)
     }
@@ -50,10 +52,22 @@ class TextRecyclerView(
     }
 
     override fun onBindViewHolder(holder: TextRecyclerViewHolder, position: Int) {
+        val layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            gravity = Gravity.END
+        }
+
 
         val item = asyncDiff.currentList[position]
         if (item.text == null) {
-            holder.materialText.text = item.userText
+            holder.materialCard.setCardBackgroundColor(context.resources.getColor(R.color.md_theme_light_primaryContainer))
+            holder.materialCard.layoutParams = layoutParams
+            holder.materialText.text = item.userText.replaceFirstChar {
+                it.uppercaseChar()
+            }
+
         } else {
             holder.materialText.setText(item.text)
         }
