@@ -2,9 +2,11 @@ package com.example.newninebank
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
@@ -32,9 +34,9 @@ class OpenAccountFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val userInputEditText =binding.editTextChatInput
+        sharedViewModel.testInc()
 
-        sharedViewModel.loadTextsOpenAccount()
+        val userInputEditText =binding.editTextChatInput
         recyclerChat = TextRecyclerView(requireContext())
 
         binding.apply {
@@ -44,8 +46,9 @@ class OpenAccountFragment : Fragment() {
         }
         sharedViewModel.openAccountChatList.observe(viewLifecycleOwner) {
             recyclerChat.asyncDiff.submitList(it)
+            changeUserInput(recyclerChat.asyncDiff.currentList.size)
             recyclerChat.notifyItemInserted(it.size + 1)
-            Log.d(TAG,recyclerChat.asyncDiff.currentList.size.toString())
+            Log.d(TAG," async List = ${recyclerChat.asyncDiff.currentList.size}")
         }
 
         userInputEditText.doAfterTextChanged {
@@ -60,6 +63,20 @@ class OpenAccountFragment : Fragment() {
 
     private fun verifyUserInput(input: Editable){
          binding.buttonSend.isEnabled = input.isNotEmpty()
+    }
+    private fun changeUserInput(count:Int){
+        when(count){
+            4 ->{
+                binding.layoutUserInput.visibility = VISIBLE
+                binding.buttonSend.visibility = VISIBLE
+                binding.editTextChatInput.visibility = VISIBLE
+                binding.editTextChatInput.setHint(R.string.open_account_enter_name_hint)
+            }
+            6->{binding.editTextChatInput.inputType= InputType.TYPE_CLASS_NUMBER
+                binding.editTextChatInput.setHint(R.string.open_account_enter_cpf_hint)
+
+            }
+        }
     }
 
 }

@@ -30,6 +30,8 @@
     <string name="hello_text">Hello,&#128513;</string>
     <string name="welcome_text">Welcome to NineBank!</string>
     <string name="open_account_enter_email">Enter an e-mail…</string>
+    <string name="open_account_enter_name_hint"> Enter name</string>
+    <string name="open_account_enter_cpf_hint"> Enter CPF</string>
     <string name="open_account_title">Opening your an account is quick and safe. And we\'ll help you every step of the way.</string>
     <string name="open_account_name">First, what is your name?</string>
     <string name="social_name_button_text">I want to use my social name </string>

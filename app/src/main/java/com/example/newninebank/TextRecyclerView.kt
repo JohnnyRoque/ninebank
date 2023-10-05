@@ -64,7 +64,6 @@ class TextRecyclerView(
             item.text == null ->  {
                 holder.materialCard.setCardBackgroundColor(context.getColor(R.color.md_theme_light_primaryContainer))
                 holder.materialCard.layoutParams = layoutParams
-
                 holder.materialText.text = item.userText.toString().replaceFirstChar {
                     it.uppercaseChar()
                 }

@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.newninebank.EnterAccountFragmentDirections
 import com.example.newninebank.HomeFragmentDirections
 import com.example.newninebank.R
+import com.example.newninebank.TAG
 import java.text.NumberFormat
 
 class NineBankViewModel : ViewModel() {
@@ -59,10 +60,10 @@ class NineBankViewModel : ViewModel() {
         NumberFormat.getCurrencyInstance().format(it)
     }
 
-    private val _userName = MutableLiveData<String>()
+    private val _userName = MutableLiveData<String>("")
     val userName: LiveData<String> = _userName.map { s ->
         var formattedName = s
-        if (s.first().isLowerCase()) {
+        if (!s.none()) {
             formattedName = s.replaceFirstChar { it.uppercase() }
         }
         formattedName
@@ -72,24 +73,85 @@ class NineBankViewModel : ViewModel() {
         MutableLiveData<MutableList<TransactionModel>>(mutableListOf())
 
 
-    fun loadTextsOpenAccount(): MutableList<OpenAccountModel> {
-        val textList = mutableListOf<OpenAccountModel>()
-        repeat(1) {
-            textList.add(OpenAccountModel(R.string.hello_text, null, false,null))
-            textList.add(OpenAccountModel(R.string.welcome_text, null, false,null))
-            textList.add(OpenAccountModel(R.string.open_account_title, null, false,null))
-            textList.add(OpenAccountModel(R.string.open_account_name, R.string.social_name_button_text, true,null)) }
-        _openAccountChatList.postValue(textList)
-        return textList
-    }
+     private fun loadTextsOpenAccount(chatList: MutableList<OpenAccountModel>):MutableList<OpenAccountModel> {
+         _openAccountChatList.postValue(chatList)
+         return chatList
+     }
 
+
+     private val chatList = mutableListOf<OpenAccountModel>()
     private val _openAccountChatList: MutableLiveData<List<OpenAccountModel>> = MutableLiveData()
     val openAccountChatList: LiveData<List<OpenAccountModel>> = _openAccountChatList
+    private var addNewTextCount = 0
 
+    fun testInc() {
+        while (addNewTextCount< 10) {
+            addNewTextCount++
+
+            when (addNewTextCount) {
+                1 -> {
+                    loadTextsOpenAccount(chatList).add(
+                        OpenAccountModel(
+                            R.string.hello_text,
+                            null,
+                            false,
+                            null
+                        )
+                    )
+                    Log.d(TAG,"op1")
+                }
+
+                2 -> {
+                    loadTextsOpenAccount(chatList).add(
+                        OpenAccountModel(
+                            R.string.welcome_text,
+                            null,
+                            false,
+                            null
+                        )
+                    )
+                    Log.d(TAG,"op2")
+                }
+                3 -> {
+                    loadTextsOpenAccount(chatList).add(
+                        OpenAccountModel(
+                            R.string.open_account_title,
+                            null,
+                            false,
+                            null
+                        )
+                    )
+                    Log.d(TAG,"op3")
+
+
+                }
+                4 -> {
+                    loadTextsOpenAccount(chatList).add(
+                        OpenAccountModel(
+                            R.string.open_account_name,
+                            R.string.social_name_button_text,
+                            true,
+                            null
+                        )
+                    )
+                    Log.d(TAG,"op4")
+                    break
+                }
+                5-> {
+                    loadTextsOpenAccount(chatList).add(OpenAccountModel(R.string.open_account_cpf, null, false, null))
+                    Log.d(TAG,"op5")
+                    break
+                }
+            }
+            Log.d(TAG,addNewTextCount.toString())
+        }
+    }
 
     fun getUserName(name: String) {
         _userName.value = name
-        loadTextsOpenAccount().add(OpenAccountModel(null, null, false, name))
+        loadTextsOpenAccount(chatList).add(
+                OpenAccountModel(null, null, false, name))
+        testInc()
 
     }
 
@@ -142,4 +204,9 @@ class NineBankViewModel : ViewModel() {
         Log.d("CalSpent", "${_transactionHistoryList.value}")
         return _transactionHistoryList.value!!
     }
+
+    fun eraseChat() {
+        _userName.value = ""
+    }
+
 }
