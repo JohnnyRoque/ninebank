@@ -6,12 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.newninebank.DialogFragmentNineBank.Companion.DIALOGFRAGMENT
 import com.example.newninebank.databinding.FragmentHomeBinding
 import com.example.newninebank.model.NineBankViewModel
-
 
 
 class HomeFragment : Fragment() {
@@ -19,6 +20,11 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val sharedViewModel: NineBankViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToEnterAccountFragment()
+            )
+        }
         super.onCreate(savedInstanceState)
 
     }
@@ -44,7 +50,13 @@ class HomeFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
     }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     fun createMaterialDialog() {
-        DialogFragmentNineBank(true,null).show(parentFragmentManager, DIALOGFRAGMENT)
+        DialogFragmentNineBank(true, null).show(parentFragmentManager, DIALOGFRAGMENT)
     }
 }

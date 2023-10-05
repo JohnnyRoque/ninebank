@@ -73,19 +73,19 @@ class NineBankViewModel : ViewModel() {
         MutableLiveData<MutableList<TransactionModel>>(mutableListOf())
 
 
-     private fun loadTextsOpenAccount(chatList: MutableList<OpenAccountModel>):MutableList<OpenAccountModel> {
-         _openAccountChatList.postValue(chatList)
-         return chatList
-     }
+    private fun loadTextsOpenAccount(chatList: MutableList<OpenAccountModel>): MutableList<OpenAccountModel> {
+        _openAccountChatList.postValue(chatList)
+        return chatList
+    }
 
 
-     private val chatList = mutableListOf<OpenAccountModel>()
+    private val chatList = mutableListOf<OpenAccountModel>()
     private val _openAccountChatList: MutableLiveData<List<OpenAccountModel>> = MutableLiveData()
     val openAccountChatList: LiveData<List<OpenAccountModel>> = _openAccountChatList
     private var addNewTextCount = 0
 
-    fun testInc() {
-        while (addNewTextCount< 10) {
+    fun addNewText() {
+        while (addNewTextCount < 10) {
             addNewTextCount++
 
             when (addNewTextCount) {
@@ -98,7 +98,7 @@ class NineBankViewModel : ViewModel() {
                             null
                         )
                     )
-                    Log.d(TAG,"op1")
+                    Log.d(TAG, "op1")
                 }
 
                 2 -> {
@@ -110,8 +110,9 @@ class NineBankViewModel : ViewModel() {
                             null
                         )
                     )
-                    Log.d(TAG,"op2")
+                    Log.d(TAG, "op2")
                 }
+
                 3 -> {
                     loadTextsOpenAccount(chatList).add(
                         OpenAccountModel(
@@ -121,10 +122,11 @@ class NineBankViewModel : ViewModel() {
                             null
                         )
                     )
-                    Log.d(TAG,"op3")
+                    Log.d(TAG, "op3")
 
 
                 }
+
                 4 -> {
                     loadTextsOpenAccount(chatList).add(
                         OpenAccountModel(
@@ -134,24 +136,33 @@ class NineBankViewModel : ViewModel() {
                             null
                         )
                     )
-                    Log.d(TAG,"op4")
+                    Log.d(TAG, "op4")
                     break
                 }
-                5-> {
-                    loadTextsOpenAccount(chatList).add(OpenAccountModel(R.string.open_account_cpf, null, false, null))
-                    Log.d(TAG,"op5")
+
+                5 -> {
+                    loadTextsOpenAccount(chatList).add(
+                        OpenAccountModel(
+                            R.string.open_account_cpf,
+                            null,
+                            false,
+                            null
+                        )
+                    )
+                    Log.d(TAG, "op5")
                     break
                 }
             }
-            Log.d(TAG,addNewTextCount.toString())
+            Log.d(TAG, addNewTextCount.toString())
         }
     }
 
     fun getUserName(name: String) {
         _userName.value = name
         loadTextsOpenAccount(chatList).add(
-                OpenAccountModel(null, null, false, name))
-        testInc()
+            OpenAccountModel(null, null, false, name)
+        )
+        addNewText()
 
     }
 
@@ -206,6 +217,8 @@ class NineBankViewModel : ViewModel() {
     }
 
     fun eraseChat() {
+        chatList.clear()
+        addNewTextCount = 0
         _userName.value = ""
     }
 

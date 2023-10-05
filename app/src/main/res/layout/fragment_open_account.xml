@@ -17,6 +17,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+
         android:layout_height="match_parent"
         tools:context=".OpenAccountFragment">
 
@@ -24,6 +25,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/open_account_recycler"
             android:layout_width="match_parent"
+
             android:layout_height="0dp"
             android:adapter="@{textRecyclerAdapter}"
             android:orientation="vertical"
@@ -35,7 +37,6 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/layout_user_input"
-            android:visibility="invisible"
             android:layout_width="match_parent"
             app:shapeAppearance="@style/RoundcornerEditText"
             style="@style/Widget.Material3.CardView.Filled"
@@ -52,7 +53,6 @@
 
                     <EditText
                         android:id="@+id/edit_text_chat_input"
-                        android:visibility="visible"
                         style="@style/Widget.Material3.TextInputEditText.FilledBox"
                         android:layout_width="330dp"
                         android:hint="@string/open_account_enter_email"
@@ -63,8 +63,8 @@
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/button_send"
                     android:layout_marginEnd="8dp"
-                    android:visibility="invisible"
                     android:enabled="false"
+
                     app:shapeAppearance="@style/FloatingActionButtonStyleNinebank"
                     android:layout_width="wrap_content"
                     app:elevation="1dp"

@@ -56,5 +56,9 @@ class FinancialStatementFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
     }
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 
 }

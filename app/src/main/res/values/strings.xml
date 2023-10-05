@@ -32,7 +32,7 @@
     <string name="open_account_enter_email">Enter an e-mail…</string>
     <string name="open_account_enter_name_hint"> Enter name</string>
     <string name="open_account_enter_cpf_hint"> Enter CPF</string>
-    <string name="open_account_title">Opening your an account is quick and safe. And we\'ll help you every step of the way.</string>
+    <string name="open_account_title">Opening an account is quick and safe. And we\'ll help you every step of the way.</string>
     <string name="open_account_name">First, what is your name?</string>
     <string name="social_name_button_text">I want to use my social name </string>
     <string name="open_account_cpf">NineBank accounts (personal and business) are always linked to your CPF, please enter your CPF.</string>
@@ -41,7 +41,10 @@
     <string name="open_account_teen">Teen Account</string>
     <string name="open_account_joint">Joint Account</string>
     <string name="open_account_individual">Individual Account</string>
-
+    <string name="positive_text">Yes</string>
+    <string name="negative_text">No</string>
+    <string name="open_account_dialog_title">Cancel the opening of your account?</string>
+    <string name="open_account_dialog_message">You will lose all the information you have filled in.</string>
 
 
     <string name="my_card">my cards</string>

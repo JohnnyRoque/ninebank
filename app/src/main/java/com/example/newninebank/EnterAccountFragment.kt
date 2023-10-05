@@ -38,11 +38,16 @@ class EnterAccountFragment : Fragment() {
             navToFragmentName = "HomeFragment"
         }
         binding.buttonOpenAccount.setOnClickListener {
+            sharedViewModel.addNewText()
             val action =
                 EnterAccountFragmentDirections.actionEnterAccountFragmentToOpenAccountFragment()
             findNavController().navigate(action)
         }
 
         super.onViewCreated(view, savedInstanceState)
+    }
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }
