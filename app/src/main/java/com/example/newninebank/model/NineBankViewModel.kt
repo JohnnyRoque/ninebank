@@ -1,9 +1,5 @@
 package com.example.newninebank.model
 
-import android.graphics.Typeface
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.StyleSpan
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -27,17 +23,8 @@ class NineBankViewModel : ViewModel() {
     }
     private val _incomeValue = MutableLiveData(0.0)
 
-    /** TEST TEST */
-    val incomeValue: LiveData<SpannableString> = _incomeValue.map {
-        val editado: SpannableString =
-            SpannableString.valueOf(NumberFormat.getCurrencyInstance().format(it))
-        editado.setSpan(
-            StyleSpan(Typeface.BOLD),
-            0,
-            it.toString().lastIndex,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        editado
+    val incomeValue: LiveData<String> = _incomeValue.map {
+        NumberFormat.getCurrencyInstance().format(it)
     }
 
     private val _savedMoney = MutableLiveData(0.0)
@@ -78,10 +65,14 @@ class NineBankViewModel : ViewModel() {
         return chatList
     }
 
+    private val _userCpf = MutableLiveData<String>()
+    val userCpf: LiveData<String> = _userCpf
+
 
     private val chatList = mutableListOf<OpenAccountModel>()
     private val _openAccountChatList: MutableLiveData<List<OpenAccountModel>> = MutableLiveData()
     val openAccountChatList: LiveData<List<OpenAccountModel>> = _openAccountChatList
+
     private var addNewTextCount = 0
 
     fun addNewText() {
@@ -153,17 +144,25 @@ class NineBankViewModel : ViewModel() {
                     break
                 }
             }
-            Log.d(TAG, addNewTextCount.toString())
         }
+        Log.d(TAG, addNewTextCount.toString())
+
     }
 
-    fun getUserName(name: String) {
-        _userName.value = name
-        loadTextsOpenAccount(chatList).add(
-            OpenAccountModel(null, null, false, name)
-        )
+    fun getUserInput(input: String) {
+        if (addNewTextCount == 5) {
+            _userCpf.value = input
+            Log.d(TAG, userCpf.value!!)
+            loadTextsOpenAccount(chatList).add(
+                OpenAccountModel(null, null, false, userText = input)
+            )
+        } else {
+            _userName.value = input
+            loadTextsOpenAccount(chatList).add(
+                OpenAccountModel(null, null, false, userText = input)
+            )
+        }
         addNewText()
-
     }
 
     fun transformList(): List<TransactionModel> {

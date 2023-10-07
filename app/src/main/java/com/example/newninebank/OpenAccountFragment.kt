@@ -1,8 +1,8 @@
 package com.example.newninebank
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,7 +27,7 @@ class OpenAccountFragment : Fragment() {
     private val sharedViewModel: NineBankViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+       requireActivity().onBackPressedDispatcher.addCallback(this) {
             MaterialAlertDialogBuilder(requireContext()).apply {
                 setTitle(R.string.open_account_dialog_title)
                     .setMessage(R.string.open_account_dialog_message)
@@ -59,28 +59,26 @@ class OpenAccountFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val userInputEditText = binding.editTextChatInput
+        val userInputEditText = binding.editTextChatInput.text
         recyclerChat = TextRecyclerView(requireContext())
 
         binding.apply {
             viewModel = sharedViewModel
             lifecycleOwner = viewLifecycleOwner
             textRecyclerAdapter = recyclerChat
+            inputText = userInputEditText
         }
         sharedViewModel.openAccountChatList.observe(viewLifecycleOwner) {
             recyclerChat.asyncDiff.submitList(it)
             changeUserInput(recyclerChat.asyncDiff.currentList.size)
-            recyclerChat.notifyItemInserted(it.size + 1)
+            recyclerChat.notifyItemInserted(it.size+1)
             Log.d(TAG, " async List = ${recyclerChat.asyncDiff.currentList.size}")
         }
 
-        userInputEditText.doAfterTextChanged {
-            verifyUserInput(it!!)
-        }
 
-        binding.buttonSend.setOnClickListener {
-            sharedViewModel.getUserName(userInputEditText.text.toString())
-        }
+//        binding.buttonSend.setOnClickListener {
+//            sharedViewModel.getUserInput(userInputEditText.text.toString())
+//        }
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -91,23 +89,32 @@ class OpenAccountFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun verifyUserInput(input: Editable) {
-        binding.buttonSend.isEnabled = input.isNotEmpty()
+    private fun verifyUserInput(input: Editable,hasLineLimit:Int = 0) {
+            binding.buttonSend.isEnabled = input.isNotEmpty() && input.length >= hasLineLimit
+
     }
 
     private fun changeUserInput(count: Int) {
         when (count) {
             4 -> {
-                binding.layoutUserInput.visibility = VISIBLE
                 binding.buttonSend.visibility = VISIBLE
                 binding.editTextChatInput.visibility = VISIBLE
                 binding.editTextChatInput.setHint(R.string.open_account_enter_name_hint)
+                binding.editTextChatInput.doAfterTextChanged {
+                    verifyUserInput(it!!)
+                }
             }
 
             6 -> {
+                binding.editTextChatInput.filters += InputFilter.LengthFilter(11)
+                binding.editTextChatInput.text.clear()
                 binding.editTextChatInput.inputType = InputType.TYPE_CLASS_NUMBER
                 binding.editTextChatInput.setHint(R.string.open_account_enter_cpf_hint)
+                binding.editTextChatInput.doAfterTextChanged {
+                    verifyUserInput(it!!,11)
+                }
                 binding.buttonSend.setOnClickListener {
+                    sharedViewModel.getUserInput( binding.editTextChatInput.text.toString())
                     findNavController().navigate(
                         OpenAccountFragmentDirections.actionOpenAccountFragmentToHomeFragment()
                     )
