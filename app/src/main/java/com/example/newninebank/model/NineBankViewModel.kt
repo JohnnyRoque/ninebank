@@ -143,6 +143,18 @@ class NineBankViewModel : ViewModel() {
                     Log.d(TAG, "op5")
                     break
                 }
+                6 ->{
+                    loadTextsOpenAccount(chatList).add(
+                        OpenAccountModel(
+                            R.string.open_account_terms_text,
+                            R.string.open_account_terms_button_text,
+                            true,
+                            null
+                        )
+                    )
+                    Log.d(TAG, "op6")
+                    break
+                }
             }
         }
         Log.d(TAG, addNewTextCount.toString())

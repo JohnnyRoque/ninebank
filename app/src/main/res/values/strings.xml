@@ -37,6 +37,8 @@
     <string name="social_name_button_text">I want to use my social name </string>
     <string name="open_account_cpf">NineBank accounts (personal and business) are always linked to your CPF, please enter your CPF.</string>
     <string name="open_account_terms_text">To continue, you need to read our Terms of Use and Privacy Policy.</string>
+    <string name="open_account_terms_button_text">Open terms of use</string>
+    <string name="open_account_input_button_text">Accept Terms of Use and Privacy Policy.</string>
     <string name="open_account_types_of_account">Now that you know more about NineBank, select the type of personal account that best suits you.</string>
     <string name="open_account_teen">Teen Account</string>
     <string name="open_account_joint">Joint Account</string>

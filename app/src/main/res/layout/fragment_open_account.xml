@@ -52,6 +52,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/user_input_button"
                 android:layout_width="match_parent"
+                android:text="@string/open_account_input_button_text"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:visibility="gone" />
@@ -80,17 +81,6 @@
                     android:contentDescription="@string/send_text" />
 
         </com.google.android.material.card.MaterialCardView>
-
-        <!--    <com.google.android.material.textview.MaterialTextView-->
-        <!--        android:id="@+id/open_account_name_textview"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:layout_marginTop="50dp"-->
-        <!--        android:text="@string/open_account_name"-->
-        <!--        android:textAppearance="?attr/textAppearanceSubtitle1"-->
-        <!--        app:layout_constraintTop_toBottomOf="@id/open_account_title_textview"-->
-        <!--        tools:layout_editor_absoluteX="0dp" />-->
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

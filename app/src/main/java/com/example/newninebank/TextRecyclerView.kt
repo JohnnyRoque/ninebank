@@ -60,22 +60,24 @@ class TextRecyclerView(
         }
 
         val item = asyncDiff.currentList[position]
-        when{
-            item.text == null ->  {
+        when {
+            item.text == null -> {
                 holder.materialCard.setCardBackgroundColor(context.getColor(R.color.md_theme_light_primaryContainer))
                 holder.materialCard.layoutParams = layoutParams
                 holder.materialText.text = item.userText.toString().replaceFirstChar {
                     it.uppercaseChar()
                 }
             }
+
             item.haveAButton -> {
+                holder.materialText.setText(item.text)
                 holder.materialButton.visibility = VISIBLE
                 holder.materialButton.setText(item.buttonText!!)
             }
-            else -> holder.materialText.setText(item.text)
-
+            else ->     holder.materialText.setText(item.text )
 
         }
+
 
 
     }
