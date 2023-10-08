@@ -201,7 +201,7 @@ class NineBankViewModel : ViewModel() {
             _accountCurrency.value = _accountCurrency.value!!.minus(spent)
             addToTransactionsHistory(
                 typeOfTransaction = "Transferência enviada",
-                transactionContent = "ANGELA ROQUE\nPIX", value = spent,
+                transactionContent = "ANGELA JACKSON\nPIX", value = spent,
 
                 )
             Log.d("CalSpent", "Add a lista ${accountCurrency.value}")
