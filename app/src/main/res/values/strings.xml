@@ -47,6 +47,7 @@
     <string name="negative_text">No</string>
     <string name="open_account_dialog_title">Cancel the opening of your account?</string>
     <string name="open_account_dialog_message">You will lose all the information you have filled in.</string>
+    <string name="right_emoji">&#128077;</string>
 
 
     <string name="my_card">my cards</string>

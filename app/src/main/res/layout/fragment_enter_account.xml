@@ -14,7 +14,10 @@
             type="com.example.newninebank.EnterAccountFragment" />
 
         <variable
-            name="navToFragmentName"
+            name="navToHomeFragment"
+            type="String" />
+        <variable
+            name="navToOpenAccountFragment"
             type="String" />
 
     </data>
@@ -29,6 +32,7 @@
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:onClick="@{() -> viewModel.onClickNavigate(enterFragment,navToOpenAccountFragment)}"
             android:text="@string/open_account_text"
             android:textAppearance="?attr/textAppearanceButton"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +44,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_enter_account"
             android:layout_width="250dp"
-            android:onClick="@{() -> viewModel.onClickNavigate(enterFragment,navToFragmentName)}"
+            android:onClick="@{() -> viewModel.onClickNavigate(enterFragment,navToHomeFragment)}"
             android:textAppearance="?attr/textAppearanceButton"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_height="wrap_content"

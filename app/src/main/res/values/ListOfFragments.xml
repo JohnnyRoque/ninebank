@@ -4,6 +4,7 @@
     <array name="listOfFragments">
         <item>FinancialStatement</item>
         <item>HomeFragment</item>
+        <item>OpenAccountFragment</item>
 
     </array>
 

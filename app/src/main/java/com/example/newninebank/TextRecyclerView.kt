@@ -77,8 +77,5 @@ class TextRecyclerView(
             else ->     holder.materialText.setText(item.text )
 
         }
-
-
-
     }
 }

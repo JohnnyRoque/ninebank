@@ -43,7 +43,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/layout_user_input"
             android:layout_width="match_parent"
-            app:shapeAppearance="@style/RoundcornerEditText"
+            app:shapeAppearance="@style/RoundCornerEditText"
             style="@style/Widget.Material3.CardView.Filled"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -61,7 +61,7 @@
                         android:id="@+id/edit_text_chat_input"
                         style="@style/Widget.Material3.TextInputEditText.FilledBox"
                         android:layout_width="330dp"
-                        android:hint="@string/open_account_enter_email"
+                        android:hint="@string/open_account_enter_name_hint"
                         android:inputType="textPersonName"
                         android:layout_height="match_parent"
                         android:autofillHints="name" />
@@ -71,7 +71,6 @@
                     android:layout_marginEnd="8dp"
                     android:enabled="false"
                     android:onClick="@{() -> viewModel.getUserInput(inputText.toString())}"
-
                     app:shapeAppearance="@style/FloatingActionButtonStyleNinebank"
                     android:layout_width="wrap_content"
                     app:elevation="1dp"

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.example.newninebank.databinding.FragmentEnterAccountBinding
 import com.example.newninebank.model.NineBankViewModel
 
@@ -15,11 +14,6 @@ class EnterAccountFragment : Fragment() {
     private var _binding: FragmentEnterAccountBinding? = null
     private val binding get() = _binding!!
     private val sharedViewModel: NineBankViewModel by activityViewModels()
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,20 +24,13 @@ class EnterAccountFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_enter_account, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.apply {
             viewModel = sharedViewModel
             enterFragment = this@EnterAccountFragment
-            navToFragmentName = "HomeFragment"
+            navToHomeFragment = resources.getTextArray(R.array.listOfFragments)[1].toString()
+            navToOpenAccountFragment = resources.getTextArray(R.array.listOfFragments)[2].toString()
         }
-        binding.buttonOpenAccount.setOnClickListener {
-            sharedViewModel.addNewText()
-            val action =
-                EnterAccountFragmentDirections.actionEnterAccountFragmentToOpenAccountFragment()
-            findNavController().navigate(action)
-        }
-
         super.onViewCreated(view, savedInstanceState)
     }
     override fun onDestroyView() {

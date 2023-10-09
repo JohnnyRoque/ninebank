@@ -1,5 +1,6 @@
 package com.example.newninebank.model
 
+import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -68,6 +69,9 @@ class NineBankViewModel : ViewModel() {
     private val _userCpf = MutableLiveData<String>()
     val userCpf: LiveData<String> = _userCpf
 
+    private val _userAcceptTerms: MutableLiveData<Boolean> = MutableLiveData()
+    val userAcceptTerms: LiveData<Boolean> = _userAcceptTerms
+
 
     private val chatList = mutableListOf<OpenAccountModel>()
     private val _openAccountChatList: MutableLiveData<List<OpenAccountModel>> = MutableLiveData()
@@ -75,10 +79,9 @@ class NineBankViewModel : ViewModel() {
 
     private var addNewTextCount = 0
 
-    fun addNewText() {
+    private fun addNewText() {
         while (addNewTextCount < 10) {
             addNewTextCount++
-
             when (addNewTextCount) {
                 1 -> {
                     loadTextsOpenAccount(chatList).add(
@@ -143,7 +146,8 @@ class NineBankViewModel : ViewModel() {
                     Log.d(TAG, "op5")
                     break
                 }
-                6 ->{
+
+                6 -> {
                     loadTextsOpenAccount(chatList).add(
                         OpenAccountModel(
                             R.string.open_account_terms_text,
@@ -155,34 +159,53 @@ class NineBankViewModel : ViewModel() {
                     Log.d(TAG, "op6")
                     break
                 }
+
+                7 -> {
+                    loadTextsOpenAccount(chatList).add(
+                        OpenAccountModel(
+                            R.string.open_account_types_of_account,
+                            null,
+                            false,
+                            null
+                        )
+                    )
+                }
             }
         }
         Log.d(TAG, addNewTextCount.toString())
-
     }
 
     fun getUserInput(input: String) {
-        if (addNewTextCount == 5) {
-            _userCpf.value = input
-            Log.d(TAG, userCpf.value!!)
-            loadTextsOpenAccount(chatList).add(
-                OpenAccountModel(null, null, false, userText = input)
-            )
-        } else {
-            _userName.value = input
-            loadTextsOpenAccount(chatList).add(
-                OpenAccountModel(null, null, false, userText = input)
-            )
+        when (addNewTextCount) {
+
+            4 -> {
+                _userName.value = input
+                loadTextsOpenAccount(chatList).add(
+                    OpenAccountModel(null, null, false, userText = input)
+                )
+            }
+
+            5 -> {
+                _userCpf.value = input
+                Log.d(TAG, (userCpf.value ?: 0).toString())
+                loadTextsOpenAccount(chatList).add(
+                    OpenAccountModel(null, null, false, userText = input)
+                )
+            }
+
+            else -> {
+                _userAcceptTerms.value = true
+                loadTextsOpenAccount(chatList).add(OpenAccountModel(null, null, false, input))
+            }
         }
         addNewText()
     }
 
     fun transformList(): List<TransactionModel> {
-        return _transactionHistoryList.value!!.toList()
+        return (_transactionHistoryList.value ?: listOf()).toList()
     }
 
-
-    fun onClickNavigate(fragment: Fragment, navToFragmentName: String) {
+    fun onClickNavigate(fragment: Fragment, navToFragmentName: String): Array<CharSequence> {
         lateinit var action: NavDirections
         val listOfFragments = fragment.resources.getTextArray(R.array.listOfFragments)
 
@@ -190,14 +213,23 @@ class NineBankViewModel : ViewModel() {
             listOfFragments[0] -> action =
                 HomeFragmentDirections.actionHomeFragmentToFinancialStatementFragment()
 
-            listOfFragments[1] -> action =
-                EnterAccountFragmentDirections.actionEnterAccountFragmentToHomeFragment()
+            listOfFragments[1] -> {
+                action =
+                    EnterAccountFragmentDirections.actionEnterAccountFragmentToHomeFragment()
+            }
+            listOfFragments[2] -> {
+                eraseChat()
+                addNewText()
+                action =
+                    EnterAccountFragmentDirections.actionEnterAccountFragmentToOpenAccountFragment()
+            }
         }
-        return findNavController(fragment).navigate(action)
+        findNavController(fragment).navigate(action)
+        return listOfFragments
     }
 
     fun calSpent(spent: Double) {
-        if (_accountCurrency.value!! >= spent && spent != 0.0) {
+        if ((_accountCurrency.value ?: 0.0) >= spent && spent != 0.0) {
             _accountCurrency.value = _accountCurrency.value!!.minus(spent)
             addToTransactionsHistory(
                 typeOfTransaction = "Transferência enviada",
@@ -208,6 +240,11 @@ class NineBankViewModel : ViewModel() {
         } else {
             Log.d("CalSpent", "Dinheiro insuficiente ${accountCurrency.value}")
         }
+    }
+    fun openTerms(){
+        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
+
+
     }
 
     private fun addToTransactionsHistory(
@@ -229,6 +266,8 @@ class NineBankViewModel : ViewModel() {
 
     fun eraseChat() {
         chatList.clear()
+        _userAcceptTerms.value = false
+        _userCpf.value = ""
         addNewTextCount = 0
         _userName.value = ""
     }

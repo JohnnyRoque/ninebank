@@ -2,7 +2,6 @@ package com.example.newninebank
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
 import android.util.Log
@@ -18,7 +17,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.example.newninebank.databinding.FragmentOpenAccountBinding
 import com.example.newninebank.model.NineBankViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -48,7 +46,6 @@ class OpenAccountFragment : Fragment() {
                     .create()
                     .show()
             }
-
         }
         super.onCreate(savedInstanceState)
 
@@ -66,7 +63,6 @@ class OpenAccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         inputMethodManager= requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
         val userInputEditText = binding.editTextChatInput.text
         recyclerChat = TextRecyclerView(requireContext())
 
@@ -97,7 +93,7 @@ class OpenAccountFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun verifyUserInput(input: Editable, hasLineLimit: Int = 0) {
+    private fun verifyUserInput(input: String, hasLineLimit: Int = 0) {
         binding.buttonSend.isEnabled = input.isNotEmpty() && input.length >= hasLineLimit
 
     }
@@ -109,37 +105,32 @@ class OpenAccountFragment : Fragment() {
                 binding.editTextChatInput.visibility = VISIBLE
                 binding.editTextChatInput.setHint(R.string.open_account_enter_name_hint)
                 binding.editTextChatInput.doAfterTextChanged {
-                    verifyUserInput(it!!)
+                    verifyUserInput(it.toString())
                 }
             }
-
             6 -> {
                 binding.editTextChatInput.filters += InputFilter.LengthFilter(11)
                 binding.editTextChatInput.text.clear()
                 binding.editTextChatInput.inputType = InputType.TYPE_CLASS_NUMBER
                 binding.editTextChatInput.setHint(R.string.open_account_enter_cpf_hint)
                 binding.editTextChatInput.doAfterTextChanged {
-                    verifyUserInput(it!!, 11)
+                    verifyUserInput(it.toString(), 11)
                 }
                 binding.buttonSend.setOnClickListener {
                     sharedViewModel.getUserInput(binding.editTextChatInput.text.toString())
                     inputMethodManager.hideSoftInputFromWindow(requireView().windowToken,0)
 
                 }
-
             }
-
             8 -> {
                 binding.userInputButton.visibility = VISIBLE
                 binding.buttonSend.visibility = GONE
                 binding.editTextChatInput.visibility = GONE
                 binding.userInputButton.setOnClickListener {
-                    findNavController().navigate(
-                        OpenAccountFragmentDirections.actionOpenAccountFragmentToHomeFragment()
-                    )
+                    binding.userInputButton.visibility = GONE
+                    sharedViewModel.getUserInput(getString(R.string.right_emoji))
                 }
             }
         }
     }
-
 }
