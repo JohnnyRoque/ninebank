@@ -65,8 +65,11 @@ class NineBankViewModel : ViewModel() {
     private val _userAcceptTerms: MutableLiveData<Boolean> = MutableLiveData()
     val userAcceptTerms: LiveData<Boolean> = _userAcceptTerms
 
+    private val _userTypeOfAccount = MutableLiveData<String>("")
+    val userTypeOfAccount : LiveData<String> = _userTypeOfAccount
 
     private val chatList = mutableListOf<OpenAccountModel>()
+
     private val _openAccountChatList: MutableLiveData<List<OpenAccountModel>> = MutableLiveData()
     val openAccountChatList: LiveData<List<OpenAccountModel>> = _openAccountChatList
 
@@ -114,8 +117,6 @@ class NineBankViewModel : ViewModel() {
                         )
                     )
                     Log.d(TAG, "op3")
-
-
                 }
 
                 4 -> {
@@ -164,12 +165,24 @@ class NineBankViewModel : ViewModel() {
                             null,
                             false,
                             null
+
                         )
                     )
+                    break
+                }
+                8->{
+                    loadTextsOpenAccount(chatList).add(
+                        OpenAccountModel(
+                            R.string.open_account_enter_email,
+                            null,
+                            false,
+                            null
+                        )
+                    )
+
                 }
             }
         }
-        Log.d(TAG, _addNewTextCount.toString())
     }
 
     fun getUserInput(input: String) {
@@ -193,6 +206,11 @@ class NineBankViewModel : ViewModel() {
 
             6 -> {
                 _userAcceptTerms.value = true
+                loadTextsOpenAccount(chatList).add(OpenAccountModel(null, null, false, input))
+            }
+            7 -> {
+                _userTypeOfAccount.value = input
+                Log.d("testUserType", (userTypeOfAccount.value).toString())
                 loadTextsOpenAccount(chatList).add(OpenAccountModel(null, null, false, input))
             }
         }

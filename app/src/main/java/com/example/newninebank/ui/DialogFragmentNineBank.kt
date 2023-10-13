@@ -2,8 +2,6 @@ package com.example.newninebank.ui
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.View.VISIBLE
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
@@ -13,23 +11,17 @@ import com.example.newninebank.model.NineBankViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DialogFragmentNineBank(
-    private val isANumber: Boolean,
-    private val container: ViewGroup?,
 ) : DialogFragment() {
     companion object {
-        const val DIALOGFRAGMENT = "DialogFragment"
+        const val DIALOG_FRAGMENT = "DialogFragment"
     }
-    private var _binding: DialogDesignBinding? = null
-    private val binding get() = _binding!!
     private val sharedViewModel: NineBankViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        _binding = DataBindingUtil.inflate(layoutInflater, R.layout.dialog_design, container, false)
+         val binding: DialogDesignBinding = DataBindingUtil.inflate(layoutInflater, R.layout.dialog_design, null, false)
         binding.apply {
             viewModel = sharedViewModel
         }
-
-
 
         return activity.let {
             val builder = MaterialAlertDialogBuilder(requireContext())
@@ -40,11 +32,6 @@ class DialogFragmentNineBank(
                         sharedViewModel.calSpent(binding.dialogEditText.text.toString().toDouble())
                         dismiss()
                     }
-                }
-                if (isANumber) {
-                    binding.dialogEditText.inputType = (0x00002002)
-                }else{
-                    binding.textFieldLayout.visibility =VISIBLE
                 }
                 setView(binding.root)
             }

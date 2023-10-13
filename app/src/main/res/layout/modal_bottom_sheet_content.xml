@@ -14,8 +14,6 @@
         android:id="@+id/modal_bottom_sheet"
         android:layout_width="match_parent"
         android:fitsSystemWindows="true"
-
-        app:layout_behavior="@string/bottom_sheet_behavior"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -26,11 +24,23 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/types_of_account_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:overScrollMode="never"
             android:orientation="horizontal"
             android:adapter="@{recyclerAdapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_confirm"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:minWidth="320dp"
+            android:layout_margin="16dp"
+            android:textAppearance="?attr/textAppearanceButton"
+            android:layout_gravity="center"
+            android:fitsSystemWindows="true"
+            android:text="@string/button_confirm"
+            android:layout_height="wrap_content"/>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

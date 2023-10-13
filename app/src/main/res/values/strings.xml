@@ -40,13 +40,18 @@
     <string name="open_account_terms_button_text">Open terms of use</string>
     <string name="open_account_input_button_text">Accept Terms of Use and Privacy Policy.</string>
     <string name="open_account_types_of_account">Now that you know more about NineBank, select the type of personal account that best suits you.</string>
-    <string name="open_account_teen">Teen Account</string>
-    <string name="open_account_joint">Joint Account</string>
-    <string name="open_account_individual">Individual Account</string>
+    <string name="teen_account_title_text">Teen Account</string>
+    <string name="teen_account_text">With NinebankTeen your child has their own investments, account, card and app, connected to their Ninebank account so you can keep a close eye on everything.</string>
+    <string name="joint_account_title_text">Joint Account</string>
+    <string name="joint_account_text">Joint account: any account holder can make financial transactions independently Simple joint account (or non-solidary): to make transactions, the signature of each account holder is required.</string>
+    <string name="individual_account_title_text">Individual Account</string>
+    <string name="individual_account_text">Full current account, credit card with no annual fee (subject to analysis), an ideal platform for investing in Brazil and around the world</string>
     <string name="positive_text">Yes</string>
     <string name="negative_text">No</string>
     <string name="open_account_dialog_title">Cancel the opening of your account?</string>
     <string name="open_account_dialog_message">You will lose all the information you have filled in.</string>
+    <string name="button_confirm">Confirm</string>
+    <string name="select_type_of_account_text">Select</string>
     <string name="right_emoji">&#128077;</string>
 
 

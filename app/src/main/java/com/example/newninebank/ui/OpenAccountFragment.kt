@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -81,17 +80,9 @@ class OpenAccountFragment : Fragment() {
         }
         sharedViewModel.openAccountChatList.observe(viewLifecycleOwner) {
             recyclerChat.asyncDiff.submitList(it)
-            sharedViewModel.addNewTextCount.value.let { count -> changeUserInput(count!!) }
+            changeUserInput(sharedViewModel.addNewTextCount.value ?: 0)
             recyclerChat.notifyItemInserted(it.size + 1)
-            Log.d(TAG, " async List = ${recyclerChat.asyncDiff.currentList.size}")
         }
-
-        binding.userInputButton.setOnClickListener {
-            sharedViewModel.getUserInput(getString(R.string.right_emoji))
-            createBottomSheet()
-        }
-
-
 
 
         super.onViewCreated(view, savedInstanceState)
@@ -110,6 +101,7 @@ class OpenAccountFragment : Fragment() {
     private fun changeUserInput(count: Int) {
         when (count) {
             4 -> {
+                /** Enter Name*/
                 binding.buttonSend.visibility = VISIBLE
                 binding.editTextChatInput.visibility = VISIBLE
                 binding.editTextChatInput.setHint(R.string.open_account_enter_name_hint)
@@ -117,8 +109,9 @@ class OpenAccountFragment : Fragment() {
                     verifyUserInput(it.toString())
                 }
             }
-
             5 -> {
+                /** Enter CPF*/
+
                 binding.editTextChatInput.filters += InputFilter.LengthFilter(11)
                 binding.editTextChatInput.text.clear()
                 binding.editTextChatInput.inputType = InputType.TYPE_CLASS_NUMBER
@@ -126,23 +119,38 @@ class OpenAccountFragment : Fragment() {
                 binding.editTextChatInput.doAfterTextChanged {
                     verifyUserInput(it.toString(), 11)
                 }
-                binding.buttonSend.setOnClickListener {
-                    sharedViewModel.getUserInput(binding.editTextChatInput.text.toString())
-                    inputMethodManager.hideSoftInputFromWindow(requireView().windowToken, 0)
-
-                }
             }
-
             6 -> {
+                /** Accept terms of use and privacy*/
+
+                inputMethodManager.hideSoftInputFromWindow(requireView().windowToken, 0)
                 binding.userInputButton.visibility = VISIBLE
                 binding.buttonSend.visibility = GONE
                 binding.editTextChatInput.visibility = GONE
+                binding.userInputButton.setOnClickListener {
+                    sharedViewModel.getUserInput(getString(R.string.right_emoji))
+                }
+            }
+            7 -> {
+                /** Choose a type of account*/
+
+                binding.userInputButton.setText(R.string.select_type_of_account_text)
+                binding.userInputButton.setOnClickListener {
+                    createBottomSheet()
+                }
+            }
+            8->{
+                binding.userInputButton.visibility = GONE
+                binding.buttonSend.visibility = VISIBLE
+                binding.editTextChatInput.visibility = VISIBLE
+                binding.editTextChatInput.setHint(R.string.open_account_enter_email)
 
             }
+
         }
     }
 
-    private fun createBottomSheet(){
+    private fun createBottomSheet() {
         ModalBottomSheet().show(parentFragmentManager, ModalBottomSheet.MODAL_TAG)
     }
 
