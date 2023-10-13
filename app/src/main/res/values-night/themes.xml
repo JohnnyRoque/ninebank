@@ -1,6 +1,7 @@
 <resources>
 
     <style name="Base.Theme.NewNineBank" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="bottomSheetDialogTheme">@style/ModalSheetDialogTheme</item>
 
     </style>
     <style name="Theme.NewNineBank" parent="Base.Theme.NewNineBank" />

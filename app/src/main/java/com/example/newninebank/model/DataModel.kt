@@ -21,3 +21,9 @@ data class OpenAccountModel(
 )
 
 
+data class TypesOfAccountModel(
+    val titleText: Int,
+    val image: Int,
+    val bodyText : Int,
+
+)

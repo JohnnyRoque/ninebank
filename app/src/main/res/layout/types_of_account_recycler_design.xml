@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/types_of_account_card"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:clickable="true"
+    android:background="?attr/selectableItemBackground"
+    android:layout_margin="8dp"
+    app:cardPreventCornerOverlap="false"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/type_of_account_image"
+            android:layout_width="match_parent"
+
+            app:shapeAppearance="@style/CardImageCornerStyle"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerCrop"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/type_of_account_head"
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:text="@string/open_account_joint"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/type_of_account_body"
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:text="@string/ninebank_slogan"
+            android:layout_height="wrap_content"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</com.google.android.material.card.MaterialCardView>

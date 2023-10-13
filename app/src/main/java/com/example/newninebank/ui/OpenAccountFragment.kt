@@ -1,4 +1,4 @@
-package com.example.newninebank
+package com.example.newninebank.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -17,12 +17,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
+import com.example.newninebank.ModalBottomSheet
+import com.example.newninebank.R
+import com.example.newninebank.TextRecyclerView
 import com.example.newninebank.databinding.FragmentOpenAccountBinding
 import com.example.newninebank.model.NineBankViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
+
 class OpenAccountFragment : Fragment() {
     private var _binding: FragmentOpenAccountBinding? = null
+
+
     val binding get() = _binding!!
     private lateinit var recyclerChat: TextRecyclerView
     private val sharedViewModel: NineBankViewModel by activityViewModels()
@@ -62,7 +68,8 @@ class OpenAccountFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        inputMethodManager= requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         val userInputEditText = binding.editTextChatInput.text
         recyclerChat = TextRecyclerView(requireContext())
 
@@ -74,19 +81,21 @@ class OpenAccountFragment : Fragment() {
         }
         sharedViewModel.openAccountChatList.observe(viewLifecycleOwner) {
             recyclerChat.asyncDiff.submitList(it)
-            changeUserInput(recyclerChat.asyncDiff.currentList.size)
+            sharedViewModel.addNewTextCount.value.let { count -> changeUserInput(count!!) }
             recyclerChat.notifyItemInserted(it.size + 1)
             Log.d(TAG, " async List = ${recyclerChat.asyncDiff.currentList.size}")
         }
 
+        binding.userInputButton.setOnClickListener {
+            sharedViewModel.getUserInput(getString(R.string.right_emoji))
+            createBottomSheet()
+        }
 
-//        binding.buttonSend.setOnClickListener {
-//            sharedViewModel.getUserInput(userInputEditText.text.toString())
-//        }
+
+
 
         super.onViewCreated(view, savedInstanceState)
     }
-
 
     override fun onDestroyView() {
         _binding = null
@@ -108,7 +117,8 @@ class OpenAccountFragment : Fragment() {
                     verifyUserInput(it.toString())
                 }
             }
-            6 -> {
+
+            5 -> {
                 binding.editTextChatInput.filters += InputFilter.LengthFilter(11)
                 binding.editTextChatInput.text.clear()
                 binding.editTextChatInput.inputType = InputType.TYPE_CLASS_NUMBER
@@ -118,19 +128,22 @@ class OpenAccountFragment : Fragment() {
                 }
                 binding.buttonSend.setOnClickListener {
                     sharedViewModel.getUserInput(binding.editTextChatInput.text.toString())
-                    inputMethodManager.hideSoftInputFromWindow(requireView().windowToken,0)
+                    inputMethodManager.hideSoftInputFromWindow(requireView().windowToken, 0)
 
                 }
             }
-            8 -> {
+
+            6 -> {
                 binding.userInputButton.visibility = VISIBLE
                 binding.buttonSend.visibility = GONE
                 binding.editTextChatInput.visibility = GONE
-                binding.userInputButton.setOnClickListener {
-                    binding.userInputButton.visibility = GONE
-                    sharedViewModel.getUserInput(getString(R.string.right_emoji))
-                }
+
             }
         }
     }
+
+    private fun createBottomSheet(){
+        ModalBottomSheet().show(parentFragmentManager, ModalBottomSheet.MODAL_TAG)
+    }
+
 }

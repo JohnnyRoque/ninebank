@@ -1,18 +1,21 @@
-package com.example.newninebank
+package com.example.newninebank.ui
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.newninebank.DialogFragmentNineBank.Companion.DIALOGFRAGMENT
+import com.example.newninebank.NineBankRecyclerView
+import com.example.newninebank.R
+import com.example.newninebank.TextRecyclerView
 import com.example.newninebank.databinding.FragmentHomeBinding
 import com.example.newninebank.model.NineBankViewModel
+import com.example.newninebank.ui.DialogFragmentNineBank.Companion.DIALOGFRAGMENT
 
 
 class HomeFragment : Fragment() {
@@ -20,7 +23,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val sharedViewModel: NineBankViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToEnterAccountFragment()
             )

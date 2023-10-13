@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="CardImageCornerStyle">
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+
+    </style>
+
+    <style name="ModalBottomSheetStyle" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="shapeAppearance">@style/ShapeAppearance_NineBank_LargeComponents</item>
+    </style>
+
+    <style name="ShapeAppearance_NineBank_LargeComponents" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">26dp</item>
+    </style>
+
+    <style name="ModalSheetDialogTheme" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModalBottomSheetStyle</item>
+    </style>
+
+
     <style name="RoundCornerEditText">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">20dp</item>
@@ -21,7 +41,6 @@
         <item name="elevation">2dp</item>
         <item name="shapeAppearance">?attr/borderRound</item>
     </style>
-
 
 
 </resources>

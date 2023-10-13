@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_dodgeInsetEdges="top"
-            tools:context=".FinancialStatementFragment">
+            tools:context=".ui.FinancialStatementFragment">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/available_balance_textview"

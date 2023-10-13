@@ -1,4 +1,4 @@
-package com.example.newninebank
+package com.example.newninebank.ui
 
 import android.app.Dialog
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LifecycleOwner
+import com.example.newninebank.R
 import com.example.newninebank.databinding.DialogDesignBinding
 import com.example.newninebank.model.NineBankViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

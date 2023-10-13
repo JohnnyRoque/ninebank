@@ -25,7 +25,11 @@ class DataSet {
         )
     }
 
-
-
-
+    fun loadTypesOfAccount(): List<TypesOfAccountModel> {
+        return listOf(
+            TypesOfAccountModel(R.string.open_account_individual,R.drawable.ic_launcher_foreground,R.string.ninebank_slogan),
+            TypesOfAccountModel(R.string.open_account_teen,R.drawable.ic_launcher_foreground,R.string.ninebank_slogan),
+            TypesOfAccountModel(R.string.open_account_joint,R.drawable.ic_launcher_foreground,R.string.ninebank_slogan
+        ))
+    }
 }

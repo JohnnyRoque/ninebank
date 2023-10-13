@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/enterAccountFragment"
-        android:name="com.example.newninebank.EnterAccountFragment"
+        android:name="com.example.newninebank.ui.EnterAccountFragment"
         android:label="fragment_enter_account"
         tools:layout="@layout/fragment_enter_account" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.newninebank.HomeFragment"
+        android:name="com.example.newninebank.ui.HomeFragment"
         android:label="@string/hello_user"
         tools:layout="@layout/fragment_home" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/financialStatementFragment"
-        android:name="com.example.newninebank.FinancialStatementFragment"
+        android:name="com.example.newninebank.ui.FinancialStatementFragment"
         android:label="FinancialStatementFragment" >
         <action
             android:id="@+id/action_financialStatementFragment_to_enterAccountFragment"
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/openAccountFragment"
-        android:name="com.example.newninebank.OpenAccountFragment"
+        android:name="com.example.newninebank.ui.OpenAccountFragment"
         android:label="fragment_open_account"
         tools:layout="@layout/fragment_open_account" >
         <action

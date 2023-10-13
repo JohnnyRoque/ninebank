@@ -24,13 +24,13 @@
 
         <variable
             name="homeFragment"
-            type="com.example.newninebank.HomeFragment" />
+            type="com.example.newninebank.ui.HomeFragment" />
     </data>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".HomeFragment">
+        tools:context=".ui.HomeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

@@ -1,6 +1,5 @@
 package com.example.newninebank.model
 
-import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -9,21 +8,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import com.example.newninebank.EnterAccountFragmentDirections
-import com.example.newninebank.HomeFragmentDirections
 import com.example.newninebank.R
-import com.example.newninebank.TAG
+import com.example.newninebank.ui.EnterAccountFragmentDirections
+import com.example.newninebank.ui.HomeFragmentDirections
+import com.example.newninebank.ui.TAG
 import java.text.NumberFormat
 
 class NineBankViewModel : ViewModel() {
 
-
-    private val _testMoney = MutableLiveData(0.0)
-    val testMoney: LiveData<String> = _testMoney.map {
-        NumberFormat.getCurrencyInstance().format(it)
-    }
     private val _incomeValue = MutableLiveData(0.0)
-
     val incomeValue: LiveData<String> = _incomeValue.map {
         NumberFormat.getCurrencyInstance().format(it)
     }
@@ -48,7 +41,7 @@ class NineBankViewModel : ViewModel() {
         NumberFormat.getCurrencyInstance().format(it)
     }
 
-    private val _userName = MutableLiveData<String>("")
+    private val _userName = MutableLiveData("")
     val userName: LiveData<String> = _userName.map { s ->
         var formattedName = s
         if (!s.none()) {
@@ -77,12 +70,16 @@ class NineBankViewModel : ViewModel() {
     private val _openAccountChatList: MutableLiveData<List<OpenAccountModel>> = MutableLiveData()
     val openAccountChatList: LiveData<List<OpenAccountModel>> = _openAccountChatList
 
-    private var addNewTextCount = 0
+    private var _addNewTextCount = MutableLiveData(0)
+    val addNewTextCount: LiveData<Int> = _addNewTextCount
 
     private fun addNewText() {
-        while (addNewTextCount < 10) {
-            addNewTextCount++
-            when (addNewTextCount) {
+
+        while ((_addNewTextCount.value ?: 0) < 15) {
+
+            _addNewTextCount.value = _addNewTextCount.value?.inc()
+
+            when (_addNewTextCount.value) {
                 1 -> {
                     loadTextsOpenAccount(chatList).add(
                         OpenAccountModel(
@@ -172,11 +169,12 @@ class NineBankViewModel : ViewModel() {
                 }
             }
         }
-        Log.d(TAG, addNewTextCount.toString())
+        Log.d(TAG, _addNewTextCount.toString())
     }
 
     fun getUserInput(input: String) {
-        when (addNewTextCount) {
+
+        when (_addNewTextCount.value) {
 
             4 -> {
                 _userName.value = input
@@ -187,13 +185,13 @@ class NineBankViewModel : ViewModel() {
 
             5 -> {
                 _userCpf.value = input
-                Log.d(TAG, (userCpf.value ?: 0).toString())
+                Log.d(TAG, (userCpf.value ?: "").toString())
                 loadTextsOpenAccount(chatList).add(
                     OpenAccountModel(null, null, false, userText = input)
                 )
             }
 
-            else -> {
+            6 -> {
                 _userAcceptTerms.value = true
                 loadTextsOpenAccount(chatList).add(OpenAccountModel(null, null, false, input))
             }
@@ -210,6 +208,7 @@ class NineBankViewModel : ViewModel() {
         val listOfFragments = fragment.resources.getTextArray(R.array.listOfFragments)
 
         when (navToFragmentName) {
+
             listOfFragments[0] -> action =
                 HomeFragmentDirections.actionHomeFragmentToFinancialStatementFragment()
 
@@ -217,6 +216,7 @@ class NineBankViewModel : ViewModel() {
                 action =
                     EnterAccountFragmentDirections.actionEnterAccountFragmentToHomeFragment()
             }
+
             listOfFragments[2] -> {
                 eraseChat()
                 addNewText()
@@ -241,12 +241,6 @@ class NineBankViewModel : ViewModel() {
             Log.d("CalSpent", "Dinheiro insuficiente ${accountCurrency.value}")
         }
     }
-    fun openTerms(){
-        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
-
-
-    }
-
     private fun addToTransactionsHistory(
         typeOfTransaction: String,
         transactionContent: String,
@@ -268,7 +262,7 @@ class NineBankViewModel : ViewModel() {
         chatList.clear()
         _userAcceptTerms.value = false
         _userCpf.value = ""
-        addNewTextCount = 0
+        _addNewTextCount.value = 0
         _userName.value = ""
     }
 

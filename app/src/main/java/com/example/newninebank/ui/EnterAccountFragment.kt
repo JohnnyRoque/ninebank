@@ -1,4 +1,4 @@
-package com.example.newninebank
+package com.example.newninebank.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.newninebank.R
 import com.example.newninebank.databinding.FragmentEnterAccountBinding
 import com.example.newninebank.model.NineBankViewModel
 
@@ -31,6 +32,7 @@ class EnterAccountFragment : Fragment() {
             navToHomeFragment = resources.getTextArray(R.array.listOfFragments)[1].toString()
             navToOpenAccountFragment = resources.getTextArray(R.array.listOfFragments)[2].toString()
         }
+
         super.onViewCreated(view, savedInstanceState)
     }
     override fun onDestroyView() {

@@ -18,6 +18,7 @@ import com.google.android.material.textview.MaterialTextView
 class TextRecyclerView(
     private val context: Context
 ) : RecyclerView.Adapter<TextRecyclerView.TextRecyclerViewHolder>() {
+
     val asyncDiff = AsyncListDiffer(this, object : DiffUtil.ItemCallback<OpenAccountModel>() {
         override fun areItemsTheSame(
             oldItem: OpenAccountModel,
