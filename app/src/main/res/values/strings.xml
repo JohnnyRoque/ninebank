@@ -41,6 +41,7 @@
     <string name="open_account_input_button_text">Accept Terms of Use and Privacy Policy.</string>
     <string name="open_account_types_of_account">Now that you know more about NineBank, select the type of personal account that best suits you.</string>
     <string name="teen_account_title_text">Teen Account</string>
+    <string name="open_account_enter_password">Enter a password</string>
     <string name="teen_account_text">With NinebankTeen your child has their own investments, account, card and app, connected to their Ninebank account so you can keep a close eye on everything.</string>
     <string name="joint_account_title_text">Joint Account</string>
     <string name="joint_account_text">Joint account: any account holder can make financial transactions independently Simple joint account (or non-solidary): to make transactions, the signature of each account holder is required.</string>

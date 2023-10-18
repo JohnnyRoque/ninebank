@@ -1,6 +1,7 @@
 package com.example.newninebank.model
 
 import android.util.Log
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -65,8 +66,16 @@ class NineBankViewModel : ViewModel() {
     private val _userAcceptTerms: MutableLiveData<Boolean> = MutableLiveData()
     val userAcceptTerms: LiveData<Boolean> = _userAcceptTerms
 
-    private val _userTypeOfAccount = MutableLiveData<String>("")
-    val userTypeOfAccount : LiveData<String> = _userTypeOfAccount
+    private val _userTypeOfAccount = MutableLiveData("")
+    val userTypeOfAccount: LiveData<String> = _userTypeOfAccount
+
+
+    private val _userEmail = MutableLiveData("")
+    val userEmail: LiveData<String> = _userEmail
+
+    private val _userPassword = MutableLiveData("")
+    val userPassword: LiveData<String> = _userPassword
+
 
     private val chatList = mutableListOf<OpenAccountModel>()
 
@@ -78,7 +87,7 @@ class NineBankViewModel : ViewModel() {
 
     private fun addNewText() {
 
-        while ((_addNewTextCount.value ?: 0) < 15) {
+        while ((_addNewTextCount.value ?: 0) < 11) {
 
             _addNewTextCount.value = _addNewTextCount.value?.inc()
 
@@ -88,7 +97,8 @@ class NineBankViewModel : ViewModel() {
                         OpenAccountModel(
                             R.string.hello_text,
                             null,
-                            false,
+                            haveAButton = false,
+                            isUserText = false,
                             null
                         )
                     )
@@ -100,7 +110,8 @@ class NineBankViewModel : ViewModel() {
                         OpenAccountModel(
                             R.string.welcome_text,
                             null,
-                            false,
+                            haveAButton = false,
+                            isUserText = false,
                             null
                         )
                     )
@@ -112,7 +123,8 @@ class NineBankViewModel : ViewModel() {
                         OpenAccountModel(
                             R.string.open_account_title,
                             null,
-                            false,
+                            haveAButton = false,
+                            isUserText = false,
                             null
                         )
                     )
@@ -124,7 +136,8 @@ class NineBankViewModel : ViewModel() {
                         OpenAccountModel(
                             R.string.open_account_name,
                             R.string.social_name_button_text,
-                            true,
+                            haveAButton = false,
+                            isUserText = false,
                             null
                         )
                     )
@@ -137,7 +150,8 @@ class NineBankViewModel : ViewModel() {
                         OpenAccountModel(
                             R.string.open_account_cpf,
                             null,
-                            false,
+                            haveAButton = false,
+                            isUserText = false,
                             null
                         )
                     )
@@ -150,7 +164,8 @@ class NineBankViewModel : ViewModel() {
                         OpenAccountModel(
                             R.string.open_account_terms_text,
                             R.string.open_account_terms_button_text,
-                            true,
+                            haveAButton = false,
+                            isUserText = false,
                             null
                         )
                     )
@@ -163,36 +178,60 @@ class NineBankViewModel : ViewModel() {
                         OpenAccountModel(
                             R.string.open_account_types_of_account,
                             null,
-                            false,
+                            haveAButton = false,
+                            isUserText = false,
                             null
 
                         )
                     )
                     break
                 }
-                8->{
+
+                8 -> {
                     loadTextsOpenAccount(chatList).add(
                         OpenAccountModel(
-                            R.string.open_account_enter_email,
+                            text = R.string.open_account_enter_email,
                             null,
-                            false,
+                            haveAButton = false,
+                            isUserText = false,
                             null
                         )
                     )
+                    break
+                }
+
+                9 -> {
+                    loadTextsOpenAccount(chatList).add(
+                        OpenAccountModel(
+                            text = R.string.open_account_enter_password,
+                            null,
+                            haveAButton = false,
+                            isUserText = false,
+                            null
+                        )
+                    )
+                    Log.d(TAG, _addNewTextCount.value.toString())
+                    break
 
                 }
             }
         }
+        Log.d(TAG, _addNewTextCount.value.toString())
     }
 
     fun getUserInput(input: String) {
-
         when (_addNewTextCount.value) {
 
             4 -> {
                 _userName.value = input
                 loadTextsOpenAccount(chatList).add(
-                    OpenAccountModel(null, null, false, userText = input)
+                    OpenAccountModel(
+                        null,
+                        null,
+                        haveAButton = true,
+                        isUserText = true,
+                        userText = input
+                    )
                 )
             }
 
@@ -200,18 +239,67 @@ class NineBankViewModel : ViewModel() {
                 _userCpf.value = input
                 Log.d(TAG, (userCpf.value ?: "").toString())
                 loadTextsOpenAccount(chatList).add(
-                    OpenAccountModel(null, null, false, userText = input)
+                    OpenAccountModel(
+                        null,
+                        null,
+                        haveAButton = false,
+                        isUserText = true,
+                        userText = input
+                    )
                 )
             }
 
             6 -> {
                 _userAcceptTerms.value = true
-                loadTextsOpenAccount(chatList).add(OpenAccountModel(null, null, false, input))
+                loadTextsOpenAccount(chatList).add(
+                    OpenAccountModel(
+                        null,
+                        null,
+                        haveAButton = false,
+                        isUserText = true,
+                        input
+                    )
+                )
             }
+
             7 -> {
                 _userTypeOfAccount.value = input
                 Log.d("testUserType", (userTypeOfAccount.value).toString())
-                loadTextsOpenAccount(chatList).add(OpenAccountModel(null, null, false, input))
+                loadTextsOpenAccount(chatList).add(
+                    OpenAccountModel(
+                        null,
+                        null,
+                        haveAButton = false,
+                        isUserText = true,
+                        input
+                    )
+                )
+            }
+
+            8 -> {
+                _userEmail.value = input
+                loadTextsOpenAccount(chatList).add(
+                    OpenAccountModel(
+                        null,
+                        null,
+                        haveAButton = false,
+                        isUserText = true,
+                        input
+                    )
+                )
+            }
+
+            else -> {
+                _userPassword.value = input
+                loadTextsOpenAccount(chatList).add(
+                    OpenAccountModel(
+                        null,
+                        null,
+                        haveAButton = false,
+                        isUserText = true,
+                        userText = input
+                    )
+                )
             }
         }
         addNewText()
@@ -259,6 +347,7 @@ class NineBankViewModel : ViewModel() {
             Log.d("CalSpent", "Dinheiro insuficiente ${accountCurrency.value}")
         }
     }
+
     private fun addToTransactionsHistory(
         typeOfTransaction: String,
         transactionContent: String,
@@ -284,4 +373,48 @@ class NineBankViewModel : ViewModel() {
         _userName.value = ""
     }
 
+    fun validateCpf(cpf: String): Boolean {
+        if (cpf.isDigitsOnly()) {
+
+            val cpfRegex = "^(?!.{9}(.)\\1).{11}\$"
+            val lastDigit = cpf.last().digitToInt()
+            val secondToLastDigit = cpf[9]
+            var count = cpf.length
+            val calTimes: (Int, Int) -> Int = { digit: Int, countL: Int -> digit.times(countL) }
+            var sum = 0
+            for (i in cpf) {
+                if (count > 2) {
+                    count--
+                    sum += calTimes(i.digitToInt(), count)
+                }
+            }
+            var digit1Result: Int = 11 - (sum % 11)
+            if (digit1Result > 9) {
+                digit1Result = 0
+            }
+            count = cpf.length
+            sum = 0
+            val newCPF = cpf.replaceRange(9, 11, digit1Result.toString())
+            for (a in newCPF) {
+                if (count >= 2) {
+                    sum += calTimes(a.digitToInt(), count)
+                    count--
+                }
+            }
+            var digit2Result = 11 - (sum % 11)
+            if (digit2Result > 9) {
+                digit2Result = 0
+            }
+            val result: (Int, Int) -> Boolean = { digit1: Int, digit2: Int ->
+                (digit1 == secondToLastDigit.digitToInt()) && digit2 == lastDigit && Regex(cpfRegex).matches(
+                    cpf
+                )
+            }
+            return result(digit1Result, digit2Result)
+        }
+        else{
+            return false
+        }
+    }
 }
+

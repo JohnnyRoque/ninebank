@@ -10,6 +10,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.activity.addCallback
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
@@ -69,18 +70,18 @@ class OpenAccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         inputMethodManager =
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        val userInputEditText = binding.editTextChatInput.text
+        val userInputEditText = binding.editTextChatInput
         recyclerChat = TextRecyclerView(requireContext())
 
         binding.apply {
             viewModel = sharedViewModel
             lifecycleOwner = viewLifecycleOwner
             textRecyclerAdapter = recyclerChat
-            inputText = userInputEditText
+            inputText = userInputEditText.text
         }
         sharedViewModel.openAccountChatList.observe(viewLifecycleOwner) {
             recyclerChat.asyncDiff.submitList(it)
-            changeUserInput(sharedViewModel.addNewTextCount.value ?: 0)
+            changeUserInput(sharedViewModel.addNewTextCount.value ?: 0, userInputEditText)
             recyclerChat.notifyItemInserted(it.size + 1)
         }
 
@@ -93,44 +94,54 @@ class OpenAccountFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun verifyUserInput(input: String, hasLineLimit: Int = 0) {
-        binding.buttonSend.isEnabled = input.isNotEmpty() && input.length >= hasLineLimit
-
+    private fun verifyUserInput(input: String, hasLineMinimal: Int = 0, isCpf: Boolean) {
+        if (isCpf) {
+            binding.buttonSend.isEnabled =
+                input.isNotEmpty() && input.length >= hasLineMinimal && sharedViewModel.validateCpf(
+                    input
+                )
+        } else {
+            binding.buttonSend.isEnabled = input.isNotEmpty() && input.length >= hasLineMinimal
+        }
     }
 
-    private fun changeUserInput(count: Int) {
+    private fun changeUserInput(count: Int, userEditText: EditText) {
         when (count) {
             4 -> {
                 /** Enter Name*/
                 binding.buttonSend.visibility = VISIBLE
-                binding.editTextChatInput.visibility = VISIBLE
-                binding.editTextChatInput.setHint(R.string.open_account_enter_name_hint)
-                binding.editTextChatInput.doAfterTextChanged {
-                    verifyUserInput(it.toString())
+                userEditText.visibility = VISIBLE
+                userEditText.setHint(R.string.open_account_enter_name_hint)
+                userEditText.doAfterTextChanged {
+                    verifyUserInput(it.toString(), isCpf = false)
                 }
             }
+
             5 -> {
                 /** Enter CPF*/
 
-                binding.editTextChatInput.filters += InputFilter.LengthFilter(11)
-                binding.editTextChatInput.text.clear()
-                binding.editTextChatInput.inputType = InputType.TYPE_CLASS_NUMBER
-                binding.editTextChatInput.setHint(R.string.open_account_enter_cpf_hint)
-                binding.editTextChatInput.doAfterTextChanged {
-                    verifyUserInput(it.toString(), 11)
+                userEditText.text.clear()
+                userEditText.filters += InputFilter.LengthFilter(11)
+                userEditText.inputType = InputType.TYPE_CLASS_NUMBER
+                userEditText.setHint(R.string.open_account_enter_cpf_hint)
+                userEditText.doAfterTextChanged {
+                    verifyUserInput(it.toString(), isCpf = true, hasLineMinimal = 11)
+
                 }
             }
+
             6 -> {
                 /** Accept terms of use and privacy*/
 
                 inputMethodManager.hideSoftInputFromWindow(requireView().windowToken, 0)
                 binding.userInputButton.visibility = VISIBLE
                 binding.buttonSend.visibility = GONE
-                binding.editTextChatInput.visibility = GONE
+                userEditText.visibility = GONE
                 binding.userInputButton.setOnClickListener {
                     sharedViewModel.getUserInput(getString(R.string.right_emoji))
                 }
             }
+
             7 -> {
                 /** Choose a type of account*/
 
@@ -139,14 +150,30 @@ class OpenAccountFragment : Fragment() {
                     createBottomSheet()
                 }
             }
-            8->{
+
+            8 -> {
+                /**Enter an E-MAIL*/
+                userEditText.text.clear()
+                userEditText.filters = arrayOf(InputFilter.LengthFilter(Int.MAX_VALUE))
                 binding.userInputButton.visibility = GONE
                 binding.buttonSend.visibility = VISIBLE
-                binding.editTextChatInput.visibility = VISIBLE
-                binding.editTextChatInput.setHint(R.string.open_account_enter_email)
+                userEditText.visibility = VISIBLE
+                userEditText.inputType = InputType.TYPE_CLASS_TEXT
+                userEditText.setHint(R.string.open_account_enter_email)
+                userEditText.doAfterTextChanged {
+                    verifyUserInput(it.toString(), isCpf = false)
+                }
 
             }
 
+            9 -> {
+                userEditText.text.clear()
+                userEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                userEditText.setHint(R.string.open_account_enter_password)
+                userEditText.doAfterTextChanged {
+                    verifyUserInput(it.toString(), isCpf = false)
+                }
+            }
         }
     }
 

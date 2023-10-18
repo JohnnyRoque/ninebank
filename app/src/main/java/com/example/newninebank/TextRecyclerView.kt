@@ -4,9 +4,11 @@ import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.view.setMargins
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +37,7 @@ class TextRecyclerView(
         }
 
     })
+
     class TextRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val materialCard: MaterialCardView = view.findViewById(R.id.text_material_card)
         val materialButton: MaterialButton = view.findViewById(R.id.open_account_user_button)
@@ -53,29 +56,47 @@ class TextRecyclerView(
 
     override fun onBindViewHolder(holder: TextRecyclerViewHolder, position: Int) {
 
-        val layoutParams = FrameLayout.LayoutParams(
+        val layoutParamsUser = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
         ).apply {
             gravity = Gravity.END
+            setMargins(8)
+
         }
+        val layoutParamsChat = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            gravity = Gravity.START
+            setMargins(8)
+        }
+
+
 
         val item = asyncDiff.currentList[position]
         when {
-            item.text == null -> {
+            item.isUserText -> {
                 holder.materialCard.setCardBackgroundColor(context.getColor(R.color.md_theme_light_primaryContainer))
-                holder.materialCard.layoutParams = layoutParams
+                holder.materialCard.layoutParams = layoutParamsUser
                 holder.materialText.text = item.userText.toString().replaceFirstChar {
                     it.uppercaseChar()
                 }
+                holder.materialButton.visibility = GONE
+
             }
 
-            item.haveAButton -> {
-                holder.materialText.setText(item.text)
+            item.haveAButton && !item.isUserText -> {
+                item.text?.let { holder.materialText.setText(it) }
                 holder.materialButton.visibility = VISIBLE
                 holder.materialButton.setText(item.buttonText!!)
             }
-            else ->     holder.materialText.setText(item.text )
+
+            else -> {
+                holder.materialCard.layoutParams =layoutParamsChat
+                holder.materialCard.setCardBackgroundColor(context.getColor(R.color.md_theme_light_surfaceVariant))
+                item.text?.let { holder.materialText.setText(it) }
+            }
 
         }
     }

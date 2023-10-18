@@ -12,7 +12,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 
-class TypesOfAccountAdapter(val context: Context, val parent: ModalBottomSheet) :
+class TypesOfAccountAdapter(val context: Context, private val modalBottomSheet: ModalBottomSheet) :
     RecyclerView.Adapter<TypesOfAccountAdapter.TypesOfAccountViewHolder>() {
     val typesAsyncDiff =
         AsyncListDiffer(this, object : DiffUtil.ItemCallback<TypesOfAccountModel>() {
@@ -59,20 +59,17 @@ class TypesOfAccountAdapter(val context: Context, val parent: ModalBottomSheet) 
         holder.accountTypeCard.setOnClickListener {
             when (item.titleText) {
                 R.string.individual_account_title_text -> {
-                    parent.confirmTypeOfAccount(context.resources.getString(R.string.individual_account_title_text))
+                    modalBottomSheet.confirmTypeOfAccount(context.resources.getString(R.string.individual_account_title_text))
 
 
                 }
 
                 R.string.teen_account_title_text -> {
-                    parent.confirmTypeOfAccount(context.resources.getString(R.string.teen_account_title_text))
-
+                    modalBottomSheet.confirmTypeOfAccount(context.resources.getString(R.string.teen_account_title_text))
 
                 }
 
-                R.string.joint_account_title_text -> {
-                    parent.confirmTypeOfAccount(context.resources.getString(R.string.joint_account_title_text))
-
+                R.string.joint_account_title_text -> { modalBottomSheet.confirmTypeOfAccount(context.resources.getString(R.string.joint_account_title_text))
 
                 }
             }
