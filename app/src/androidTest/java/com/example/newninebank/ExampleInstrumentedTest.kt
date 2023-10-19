@@ -21,7 +21,7 @@ class InstrumentedTest{
         onView(withId(R.id.button_open_account)).perform(ViewActions.click())
         onView(withId(R.id.edit_text_chat_input)).perform(ViewActions.typeText("Johnny"))
         onView(withId(R.id.button_send)).perform(ViewActions.click())
-        onView(withId(R.id.edit_text_chat_input)).perform(ViewActions.typeText("12345678910"))
+        onView(withId(R.id.edit_text_chat_input)).perform(ViewActions.typeText("12345678909"))
         onView(withId(R.id.button_send)).perform(ViewActions.click())
         onView(withId(R.id.user_input_button)).perform(ViewActions.click())
         onView(withId(R.id.user_input_button)).perform(ViewActions.click())
@@ -33,5 +33,26 @@ class InstrumentedTest{
         onView(withId(R.id.button_send)).perform(ViewActions.click())
         onView(withId(R.id.edit_text_chat_input)).perform(ViewActions.typeText("Password1234*"))
         onView(withId(R.id.button_send)).perform(ViewActions.click())
+    }
+
+    @Test
+    fun testClickonMultipleTypesOfAccount(){
+        onView(withId(R.id.button_open_account)).perform(ViewActions.click())
+        onView(withId(R.id.edit_text_chat_input)).perform(ViewActions.typeText("Johnny"))
+        onView(withId(R.id.button_send)).perform(ViewActions.click())
+        onView(withId(R.id.edit_text_chat_input)).perform(ViewActions.typeText("12345678909"))
+        onView(withId(R.id.button_send)).perform(ViewActions.click())
+        onView(withId(R.id.user_input_button)).perform(ViewActions.click())
+        onView(withId(R.id.user_input_button)).perform(ViewActions.click())
+        onView(withId(R.id.types_of_account_recycler)).perform(ViewActions.swipeRight())
+        onView(withId(R.id.types_of_account_recycler)).perform(ViewActions.swipeLeft())
+        onView(withId(R.id.types_of_account_recycler)).perform(RecyclerViewActions.actionOnItemAtPosition<TypesOfAccountAdapter.TypesOfAccountViewHolder>(2,ViewActions.click()))
+        onView(withId(R.id.types_of_account_recycler)).perform(RecyclerViewActions.actionOnItemAtPosition<TypesOfAccountAdapter.TypesOfAccountViewHolder>(1,ViewActions.click()))
+        onView(withId(R.id.types_of_account_recycler)).perform(RecyclerViewActions.actionOnItemAtPosition<TypesOfAccountAdapter.TypesOfAccountViewHolder>(0,ViewActions.click()))
+        onView(withId(R.id.types_of_account_recycler)).perform(RecyclerViewActions.actionOnItemAtPosition<TypesOfAccountAdapter.TypesOfAccountViewHolder>(1,ViewActions.click()))
+        onView(withId(R.id.button_confirm)).perform(ViewActions.click())
+        onView(withId(R.id.edit_text_chat_input)).perform(ViewActions.typeText("john.doe@gmail.com"))
+
+
     }
 }

@@ -4,14 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newninebank.model.DataModel
 import com.example.newninebank.model.DataSet
-import com.example.newninebank.model.NineBankViewModel
+import com.example.newninebank.ui.HomeFragmentDirections
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
 
-class NineBankRecyclerView(private val context: Context, private val dataSet: List<DataModel> = DataSet().loadButtons()) :
+class NineBankRecyclerView(val fragment:Fragment,private val context: Context, private val dataSet: List<DataModel> = DataSet().loadButtons()) :
     RecyclerView.Adapter<NineBankRecyclerView.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -34,7 +36,12 @@ class NineBankRecyclerView(private val context: Context, private val dataSet: Li
         holder.buttonName.text = context.resources.getText(item.name)
         holder.floatingActionButton.setImageResource(item.image)
         holder.floatingActionButton.setOnClickListener {
+            when (holder.buttonName.text){
+                context.resources.getStringArray(R.array.listOfFragments)[3]->{
+                    findNavController(fragment).navigate(HomeFragmentDirections.actionHomeFragmentToFinancialStatementFragment())
+                }
 
+            }
         }
     }
 }

@@ -12,7 +12,7 @@
 
         <variable
             name="textRecyclerAdapter"
-            type="com.example.newninebank.TextRecyclerView" />
+            type="com.example.newninebank.ChatRecyclerAdapter" />
 
         <variable
             name="inputText"

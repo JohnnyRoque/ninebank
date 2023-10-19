@@ -19,12 +19,7 @@ import com.example.newninebank.model.NineBankViewModel
 class FinancialStatementFragment : Fragment() {
     private var _binding: FragmentFinancialStatementBinding? = null
     val binding get() = _binding!!
-    val sharedViewModel: NineBankViewModel by activityViewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private val sharedViewModel: NineBankViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,14 +41,8 @@ class FinancialStatementFragment : Fragment() {
             transactionHistoryRecycler = TransactionHistoryRecycler(sharedViewModel.transformList())
             viewModel = sharedViewModel
         }
-
         binding.appbarFs.setNavigationOnClickListener {
             findNavController().navigateUp()
-
-            /** Para navegar de volta para o fragmento inícial na backstack retirando os demais e somente deixando a nova instância que foi criada. */
-//            findNavController().navigate(
-//                FinancialStatementFragmentDirections.actionFinancialStatementFragmentToEnterAccountFragment()
-//            )
         }
 
         super.onViewCreated(view, savedInstanceState)

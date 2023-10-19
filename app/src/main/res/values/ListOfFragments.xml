@@ -2,9 +2,10 @@
 <resources>
 
     <array name="listOfFragments">
-        <item>FinancialStatement</item>
-        <item>HomeFragment</item>
+        <item>EnterAccount</item>
         <item>OpenAccountFragment</item>
+        <item>HomeFragment</item>
+        <item>FinancialStatement</item>
 
     </array>
 

@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class ModalBottomSheet : BottomSheetDialogFragment() {
     private val sharedViewModel: NineBankViewModel by activityViewModels()
     private var _binding: ModalBottomSheetContentBinding? = null
+    private lateinit var typeOfAccount : String
     val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,9 +36,10 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
             lifecycleOwner = viewLifecycleOwner
         }
         binding.buttonConfirm.setOnClickListener {
+            sharedViewModel.getUserInput(typeOfAccount)
             dismiss()
-
         }
+
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -46,7 +48,8 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
         const val MODAL_TAG = "ModalBottomSheet"
     }
 
-    fun confirmTypeOfAccount(account:String){
-        sharedViewModel.getUserInput(account)
+    fun confirmTypeOfAccount(account:String):String{
+        typeOfAccount = account
+        return typeOfAccount
     }
 }

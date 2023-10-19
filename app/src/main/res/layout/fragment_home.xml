@@ -19,39 +19,51 @@
             type="com.example.newninebank.TextRecyclerView" />
 
         <variable
+            name="benefitsRecyclerAdapter"
+            type="com.example.newninebank.TypesOfAccountAdapter" />
+
+        <variable
             name="navToFragmentName"
             type="String" />
 
         <variable
             name="homeFragment"
             type="com.example.newninebank.ui.HomeFragment" />
+
     </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.HomeFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/appbar_home"
+                style="@style/Widget.Material3.AppBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menu="@menu/menu_top_app_bar"
+                android:minHeight="?attr/actionBarSize"
+                android:title="@{@string/hello_user(viewModel.userName)}"
+                />
+        </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.HomeFragment">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/appbar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/appbar_home"
-                    style="@style/Widget.Material3.AppBarLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:title="@{@string/hello_user(viewModel.userName)}"
-                     />
-            </com.google.android.material.appbar.AppBarLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/account_currency_textview"
@@ -59,14 +71,15 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
+                android:contentDescription="@{@string/content_description_account_currency(viewModel.accountCurrency)}"
                 android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
-                android:fontFamily="@font/roboto_medium"
                 android:onClick="@{() -> viewModel.onClickNavigate(homeFragment,navToFragmentName)}"
                 android:padding="16dp"
                 android:text="@{@string/account_currency_text(viewModel.accountCurrency)}"
                 android:textAppearance="?attr/textAppearanceSubtitle1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/appbar_layout" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/buttons_recyclerview"
@@ -125,7 +138,7 @@
                 android:orientation="vertical"
                 android:padding="16dp"
                 app:layout_constraintTop_toBottomOf="@id/divider_1"
-                tools:layout_editor_absoluteX="8dp">
+               >
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
@@ -137,16 +150,16 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="6dp"
                     android:text="@{@string/current_bill_text(viewModel.currentBill)}"
-                    android:textAppearance="?attr/textAppearanceSubtitle1" />
+                    android:textAppearance="?attr/textAppearanceBody2" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="@{@string/available_limit_text(viewModel.availableLimit)}"
-                    android:textAppearance="?attr/textAppearanceSubtitle2" />
+                    android:textAppearance="?attr/textAppearanceBody2" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <com.google.android.material.divider.MaterialDivider
@@ -155,20 +168,126 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/credit_card_layout" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/card_button2"
-                android:layout_width="320dp"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/bank_loan_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:onClick="@{() -> homeFragment.createMaterialDialog()}"
-                android:text="@string/my_card"
-                android:textAlignment="textStart"
-                android:textAppearance="?attr/textAppearanceButton"
-                app:icon="@drawable/baseline_arrow_forward_ios_24"
-                app:iconTint="@color/gold_color"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/divider_2">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_loan_headline"
+                android:layout_width="match_parent"
+                android:text="@string/bank_loan_headline"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/divider_2"
+
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_loan_body"
+                android:layout_width="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider_2" />
+                android:layout_marginTop="6dp"
+                android:text="@{@string/loan_available_text(viewModel.availableLoan)}"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/text_view_loan_headline"
+
+                />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/bank_loan_layout"
+                />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/investments_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/divider_3">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_view_investments_headline"
+                    android:layout_width="match_parent"
+                    android:text="@string/investments_text"
+                    android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/divider_2"
+
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_view_investments_body"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="6dp"
+                    android:text="@{@string/account_income_text(viewModel.incomeValue)}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_loan_headline"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/investments_layout"
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_benefits_headline"
+                android:layout_width="match_parent"
+                android:text="@string/benefits_text"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/divider_4" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_benefits"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/text_view_benefits_headline" />
+
+
+
+
+
+
+
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/card_button2"-->
+<!--                android:layout_width="320dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="8dp"-->
+<!--                android:onClick="@{() -> homeFragment.createMaterialDialog()}"-->
+<!--                android:text="@string/my_card"-->
+<!--                android:textAlignment="textStart"-->
+<!--                android:textAppearance="?attr/textAppearanceButton"-->
+<!--                app:icon="@drawable/baseline_arrow_forward_ios_24"-->
+<!--                app:iconTint="@color/gold_color"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/divider_2" />-->
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

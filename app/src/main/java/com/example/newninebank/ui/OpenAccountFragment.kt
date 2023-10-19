@@ -17,9 +17,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
+import com.example.newninebank.ChatRecyclerAdapter
 import com.example.newninebank.ModalBottomSheet
 import com.example.newninebank.R
-import com.example.newninebank.TextRecyclerView
 import com.example.newninebank.databinding.FragmentOpenAccountBinding
 import com.example.newninebank.model.NineBankViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -30,7 +30,7 @@ class OpenAccountFragment : Fragment() {
 
 
     val binding get() = _binding!!
-    private lateinit var recyclerChat: TextRecyclerView
+    private lateinit var recyclerChat: ChatRecyclerAdapter
     private val sharedViewModel: NineBankViewModel by activityViewModels()
     private lateinit var inputMethodManager: InputMethodManager
 
@@ -71,7 +71,7 @@ class OpenAccountFragment : Fragment() {
         inputMethodManager =
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         val userInputEditText = binding.editTextChatInput
-        recyclerChat = TextRecyclerView(requireContext())
+        recyclerChat = ChatRecyclerAdapter(requireContext())
 
         binding.apply {
             viewModel = sharedViewModel

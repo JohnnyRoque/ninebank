@@ -8,7 +8,8 @@
     <string name="payments_text">Payments</string>
     <string name="pix_text">PIX</string>
     <string name="savings_text">Savings</string>
-    <string name="bank_loan_text">Bank\loan</string>
+    <string name="loan_available_text">Available value of up to %1$s</string>
+    <string name="bank_loan_text">Bank loan</string>
     <string name="transfer_text">Transfer</string>
     <string name="financial_statement">Financial\nstatement</string>
     <string name="investments_text">Investments</string>
@@ -17,7 +18,7 @@
     <string name="current_bill_text">Current bill\n%1$s</string>
     <string name="month_transactions_text">\tMonth\'s Transactions</string>
     <string name="saved_value_text">\tSaved value: %1$s</string>
-    <string name="account_income_text">\tTotal account income +%1$s this month</string>
+    <string name="account_income_text">Total account income +%1$s this month</string>
     <string name="available_limit_text">Available limit:%1$s </string>
     <string name="credit_card_text">Credit Card</string>
     <string name="account_currency_text">Account\n%1$s</string>
@@ -38,6 +39,7 @@
     <string name="open_account_cpf">NineBank accounts (personal and business) are always linked to your CPF, please enter your CPF.</string>
     <string name="open_account_terms_text">To continue, you need to read our Terms of Use and Privacy Policy.</string>
     <string name="open_account_terms_button_text">Open terms of use</string>
+    <string name="content_description_account_currency"> account currency %1$s,open financial statement</string>
     <string name="open_account_input_button_text">Accept Terms of Use and Privacy Policy.</string>
     <string name="open_account_types_of_account">Now that you know more about NineBank, select the type of personal account that best suits you.</string>
     <string name="teen_account_title_text">Teen Account</string>
@@ -53,10 +55,14 @@
     <string name="open_account_dialog_message">You will lose all the information you have filled in.</string>
     <string name="button_confirm">Confirm</string>
     <string name="select_type_of_account_text">Select</string>
+    <string name="bank_loan_headline">Bank loan</string>
     <string name="right_emoji">&#128077;</string>
 
 
     <string name="my_card">my cards</string>
     <string name="transfer_value">Qual o valor da transferência?</string>
     <string name="send_text">send</string>
+    <string name="hide_option_text">hide_option</string>
+    <string name="option_question_mark" />
+    <string name="benefits_text">Ninebank Benefits</string>
 </resources>

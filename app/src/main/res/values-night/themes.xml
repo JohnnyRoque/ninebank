@@ -2,6 +2,9 @@
 
     <style name="Base.Theme.NewNineBank" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="bottomSheetDialogTheme">@style/ModalSheetDialogTheme</item>
+        <item name="dialogTheme">@style/MaterialAlertDialog.Material3</item>
+        <item name="android:textAppearance">@style/textStyle</item>
+        <item name="fontFamily">@font/roboto_medium</item>
 
     </style>
     <style name="Theme.NewNineBank" parent="Base.Theme.NewNineBank" />

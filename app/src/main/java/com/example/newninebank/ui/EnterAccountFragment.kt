@@ -20,7 +20,6 @@ class EnterAccountFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_enter_account, container, false)
         return binding.root
@@ -29,8 +28,8 @@ class EnterAccountFragment : Fragment() {
         binding.apply {
             viewModel = sharedViewModel
             enterFragment = this@EnterAccountFragment
-            navToHomeFragment = resources.getTextArray(R.array.listOfFragments)[1].toString()
-            navToOpenAccountFragment = resources.getTextArray(R.array.listOfFragments)[2].toString()
+            navToHomeFragment = resources.getStringArray(R.array.listOfFragments)[2]
+            navToOpenAccountFragment = resources.getStringArray(R.array.listOfFragments)[1]
         }
 
         super.onViewCreated(view, savedInstanceState)

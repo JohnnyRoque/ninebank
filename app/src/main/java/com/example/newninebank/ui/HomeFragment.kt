@@ -15,7 +15,6 @@ import com.example.newninebank.R
 import com.example.newninebank.TextRecyclerView
 import com.example.newninebank.databinding.FragmentHomeBinding
 import com.example.newninebank.model.NineBankViewModel
-import com.example.newninebank.ui.DialogFragmentNineBank.Companion.DIALOG_FRAGMENT
 
 
 class HomeFragment : Fragment() {
@@ -36,7 +35,6 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         return binding.root
     }
@@ -46,7 +44,7 @@ class HomeFragment : Fragment() {
         binding.apply {
             viewModel = sharedViewModel
             lifecycleOwner = viewLifecycleOwner
-            buttonRecyclerAdapter = NineBankRecyclerView(requireContext())
+            buttonRecyclerAdapter = NineBankRecyclerView(requireParentFragment(),requireContext())
             textRecyclerAdapter = TextRecyclerView(requireContext())
             homeFragment = this@HomeFragment
             navToFragmentName = "FinancialStatement"
@@ -57,9 +55,5 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
-    }
-
-    fun createMaterialDialog() {
-        DialogFragmentNineBank().show(parentFragmentManager, DIALOG_FRAGMENT)
     }
 }

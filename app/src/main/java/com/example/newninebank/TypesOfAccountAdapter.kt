@@ -60,13 +60,10 @@ class TypesOfAccountAdapter(val context: Context, private val modalBottomSheet: 
             when (item.titleText) {
                 R.string.individual_account_title_text -> {
                     modalBottomSheet.confirmTypeOfAccount(context.resources.getString(R.string.individual_account_title_text))
-
-
                 }
 
                 R.string.teen_account_title_text -> {
                     modalBottomSheet.confirmTypeOfAccount(context.resources.getString(R.string.teen_account_title_text))
-
                 }
 
                 R.string.joint_account_title_text -> { modalBottomSheet.confirmTypeOfAccount(context.resources.getString(R.string.joint_account_title_text))

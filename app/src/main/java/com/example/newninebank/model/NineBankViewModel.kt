@@ -10,7 +10,9 @@ import androidx.lifecycle.map
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.newninebank.R
+import com.example.newninebank.ui.EnterAccountFragment
 import com.example.newninebank.ui.EnterAccountFragmentDirections
+import com.example.newninebank.ui.HomeFragment
 import com.example.newninebank.ui.HomeFragmentDirections
 import com.example.newninebank.ui.TAG
 import java.text.NumberFormat
@@ -26,6 +28,12 @@ class NineBankViewModel : ViewModel() {
     val savedMoney: LiveData<String> = _savedMoney.map {
         NumberFormat.getCurrencyInstance().format(it)
     }
+
+    private val _availableLoan = MutableLiveData(0.0)
+    val availableLoan: LiveData<String> = _availableLoan.map {
+        NumberFormat.getCurrencyInstance().format(it)
+    }
+
 
     private val _accountCurrency = MutableLiveData(1000.0)
     val accountCurrency: LiveData<String> = _accountCurrency.map {
@@ -164,7 +172,7 @@ class NineBankViewModel : ViewModel() {
                         OpenAccountModel(
                             R.string.open_account_terms_text,
                             R.string.open_account_terms_button_text,
-                            haveAButton = false,
+                            haveAButton = true,
                             isUserText = false,
                             null
                         )
@@ -313,26 +321,35 @@ class NineBankViewModel : ViewModel() {
         lateinit var action: NavDirections
         val listOfFragments = fragment.resources.getTextArray(R.array.listOfFragments)
 
-        when (navToFragmentName) {
+        when (fragment) {
 
-            listOfFragments[0] -> action =
-                HomeFragmentDirections.actionHomeFragmentToFinancialStatementFragment()
-
-            listOfFragments[1] -> {
-                action =
-                    EnterAccountFragmentDirections.actionEnterAccountFragmentToHomeFragment()
+            is EnterAccountFragment->{
+                when(navToFragmentName){
+                    listOfFragments[1] -> {
+                        eraseChat()
+                        addNewText()
+                        action =
+                            EnterAccountFragmentDirections.actionEnterAccountFragmentToOpenAccountFragment()
+                    }
+                    listOfFragments[2] -> {
+                        action =
+                            EnterAccountFragmentDirections.actionEnterAccountFragmentToHomeFragment()
+                    }
+                }
             }
+            is HomeFragment -> {
+                when(navToFragmentName){
+                    listOfFragments[3] -> action =
+                        HomeFragmentDirections.actionHomeFragmentToFinancialStatementFragment()
 
-            listOfFragments[2] -> {
-                eraseChat()
-                addNewText()
-                action =
-                    EnterAccountFragmentDirections.actionEnterAccountFragmentToOpenAccountFragment()
+                }
             }
         }
         findNavController(fragment).navigate(action)
         return listOfFragments
     }
+
+
 
     fun calSpent(spent: Double) {
         if ((_accountCurrency.value ?: 0.0) >= spent && spent != 0.0) {
