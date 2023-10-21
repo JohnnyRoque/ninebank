@@ -27,6 +27,25 @@
         android:layout_height="match_parent"
         tools:context=".ui.EnterAccountFragment">
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/background_image"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img2"
+            android:layout_height="match_parent"/>
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ninebank_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ninebank_wallpaper2__2_"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="fitStart"
+            android:layout_marginEnd="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_open_account"
             android:layout_width="320dp"
@@ -46,7 +65,7 @@
             android:layout_width="250dp"
             android:onClick="@{() -> viewModel.onClickNavigate(enterFragment,navToHomeFragment)}"
             android:textAppearance="?attr/textAppearanceButton"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/enter_account_text"

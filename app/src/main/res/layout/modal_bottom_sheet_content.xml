@@ -32,6 +32,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_confirm"
+            android:enabled="false"
             style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="wrap_content"
             android:minWidth="320dp"

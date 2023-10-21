@@ -12,9 +12,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DialogFragmentNineBank(
 ) : DialogFragment() {
-    companion object {
-        const val DIALOG_FRAGMENT = "DialogFragment"
-    }
+
     private val sharedViewModel: NineBankViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -29,7 +27,7 @@ class DialogFragmentNineBank(
                 setNegativeButton(getText(R.string.cancel_text)) { _, _ -> }
                 setPositiveButton(getText(R.string.continue_text)) { _, _ ->
                     if (!binding.dialogEditText.text.isNullOrBlank()) {
-                        sharedViewModel.calSpent(binding.dialogEditText.text.toString().toDouble())
+//                        sharedViewModel.calSpent(binding.dialogEditText.text.toString().toDouble())
                         dismiss()
                     }
                 }

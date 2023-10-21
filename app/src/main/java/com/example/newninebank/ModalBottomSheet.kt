@@ -36,8 +36,12 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
             lifecycleOwner = viewLifecycleOwner
         }
         binding.buttonConfirm.setOnClickListener {
-            sharedViewModel.getUserInput(typeOfAccount)
-            dismiss()
+            if (typeOfAccount.isEmpty()){
+                return@setOnClickListener
+            }else {
+                sharedViewModel.getUserInput(typeOfAccount)
+                dismiss()
+            }
         }
 
         super.onViewCreated(view, savedInstanceState)
@@ -49,6 +53,7 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
     }
 
     fun confirmTypeOfAccount(account:String):String{
+        binding.buttonConfirm.isEnabled = true
         typeOfAccount = account
         return typeOfAccount
     }
