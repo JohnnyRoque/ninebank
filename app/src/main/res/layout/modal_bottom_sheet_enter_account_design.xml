@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bottomSheetBehavior"
+            type="com.example.newninebank.ui.enter_account.ModalBottomSheet" />
+        <variable
+            name="navToHomeFragment"
+            type="String" />
+        <variable
+            name="enterAccountFragment"
+            type="com.example.newninebank.ui.enter_account.EnterAccountFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.example.newninebank.model.NineBankViewModel" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="wrap_content"
+        >
+
+        <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+            android:id="@+id/drag_handle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_field_layout_cpf"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/open_account_enter_cpf_hint"
+            android:maxWidth="488dp"
+            android:minWidth="346dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/drag_handle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_field_cpf"
+                android:layout_width="match_parent"
+                android:maxLength="11"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_field_layout_password"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:layout_weight="1"
+            android:hint="@string/password_text"
+            android:maxWidth="488dp"
+            app:endIconMode="password_toggle"
+            android:minWidth="346dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_field_layout_cpf">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_field_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sign_in_button"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:maxWidth="320dp"
+            android:layout_weight="1"
+            android:textAppearance="?attr/textAppearanceButton"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:minWidth="320dp"
+            android:text="@string/enter_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_field_layout_password" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

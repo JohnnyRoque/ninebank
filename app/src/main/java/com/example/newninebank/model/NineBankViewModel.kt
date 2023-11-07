@@ -10,11 +10,12 @@ import androidx.lifecycle.map
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.newninebank.R
-import com.example.newninebank.ui.EnterAccountFragment
-import com.example.newninebank.ui.EnterAccountFragmentDirections
-import com.example.newninebank.ui.HomeFragment
-import com.example.newninebank.ui.HomeFragmentDirections
 import com.example.newninebank.ui.TAG
+import com.example.newninebank.ui.enter_account.EnterAccountFragment
+import com.example.newninebank.ui.enter_account.EnterAccountFragmentDirections
+import com.example.newninebank.ui.home_Fragment.HomeFragment
+import com.example.newninebank.ui.home_Fragment.HomeFragmentDirections
+import com.example.newninebank.util.Routes
 import java.text.NumberFormat
 
 class NineBankViewModel : ViewModel() {
@@ -317,21 +318,20 @@ class NineBankViewModel : ViewModel() {
         return (_transactionHistoryList.value ?: listOf()).toList()
     }
 
-    fun onClickNavigate(fragment: Fragment, navToFragmentName: String): Array<CharSequence> {
+    fun onClickNavigate(fragment: Fragment, navToFragmentName: String) {
         lateinit var action: NavDirections
-        val listOfFragments = fragment.resources.getTextArray(R.array.listOfFragments)
 
         when (fragment) {
 
-            is EnterAccountFragment->{
+            is EnterAccountFragment ->{
                 when(navToFragmentName){
-                    listOfFragments[1] -> {
+                    Routes.OPEN_ACCOUNT -> {
                         eraseChat()
                         addNewText()
                         action =
                             EnterAccountFragmentDirections.actionEnterAccountFragmentToOpenAccountFragment()
                     }
-                    listOfFragments[2] -> {
+                    Routes.HOME_FRAGMENT -> {
                         action =
                             EnterAccountFragmentDirections.actionEnterAccountFragmentToHomeFragment()
                     }
@@ -339,24 +339,24 @@ class NineBankViewModel : ViewModel() {
             }
             is HomeFragment -> {
                 when(navToFragmentName){
-                    listOfFragments[3] -> action =
+                    Routes.FINANCIAL_STATEMENT -> action =
                         HomeFragmentDirections.actionHomeFragmentToFinancialStatementFragment()
 
                 }
             }
         }
-        findNavController(fragment).navigate(action)
-        return listOfFragments
+       return findNavController(fragment).navigate(action)
     }
 
 
 
-    fun calSpent(spent: Double) {
+    fun calSpent(spent: Double, spentTypeOfTransaction: String,spentTransactionContent: String) {
         if ((_accountCurrency.value ?: 0.0) >= spent && spent != 0.0) {
             _accountCurrency.value = _accountCurrency.value!!.minus(spent)
             addToTransactionsHistory(
-                typeOfTransaction = "Transferência enviada",
-                transactionContent = "ANGELA JACKSON\nPIX", value = spent,
+                typeOfTransaction = spentTypeOfTransaction,
+                transactionContent = spentTransactionContent,
+                value = spent,
 
                 )
             Log.d("CalSpent", "Add a lista ${accountCurrency.value}")

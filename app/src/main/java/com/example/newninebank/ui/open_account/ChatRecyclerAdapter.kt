@@ -1,25 +1,25 @@
-package com.example.newninebank
+package com.example.newninebank.ui.open_account
 
 import android.content.Context
+import android.graphics.Color
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.view.setMargins
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.newninebank.R
 import com.example.newninebank.model.OpenAccountModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 
-class TextRecyclerView(
+class ChatRecyclerAdapter (
     private val context: Context
-) : RecyclerView.Adapter<TextRecyclerView.ChatRecyclerViewHolder>() {
+) : RecyclerView.Adapter<ChatRecyclerAdapter.ChatRecyclerViewHolder>() {
 
     val asyncDiff = AsyncListDiffer(this, object : DiffUtil.ItemCallback<OpenAccountModel>() {
         override fun areItemsTheSame(
@@ -39,6 +39,7 @@ class TextRecyclerView(
     })
 
     class ChatRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         val materialCard: MaterialCardView = view.findViewById(R.id.text_material_card)
         val materialButton: MaterialButton = view.findViewById(R.id.open_account_user_button)
         val materialText: MaterialTextView = view.findViewById(R.id.material_text_id)
@@ -71,8 +72,7 @@ class TextRecyclerView(
             gravity = Gravity.START
             setMargins(8)
         }
-
-
+        holder.materialText.setTextColor(Color.BLACK)
 
         val item = asyncDiff.currentList[position]
         when {
@@ -82,18 +82,20 @@ class TextRecyclerView(
                 holder.materialText.text = item.userText.toString().replaceFirstChar {
                     it.uppercaseChar()
                 }
-                holder.materialButton.visibility = GONE
+                holder.materialButton.visibility = View.GONE
 
             }
 
             item.haveAButton && !item.isUserText -> {
                 item.text?.let { holder.materialText.setText(it) }
-                holder.materialButton.visibility = VISIBLE
+                holder.materialCard.setCardBackgroundColor(context.getColor(R.color.md_theme_light_surfaceVariant))
+                holder.materialButton.setTextColor(Color.BLACK)
+                holder.materialButton.visibility = View.VISIBLE
                 holder.materialButton.setText(item.buttonText!!)
             }
 
             else -> {
-                holder.materialCard.layoutParams =layoutParamsChat
+                holder.materialCard.layoutParams = layoutParamsChat
                 holder.materialCard.setCardBackgroundColor(context.getColor(R.color.md_theme_light_surfaceVariant))
                 item.text?.let { holder.materialText.setText(it) }
             }
@@ -101,3 +103,5 @@ class TextRecyclerView(
         }
     }
 }
+
+

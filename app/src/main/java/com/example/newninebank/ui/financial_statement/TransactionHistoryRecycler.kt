@@ -1,9 +1,10 @@
-package com.example.newninebank
+package com.example.newninebank.ui.financial_statement
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.newninebank.R
 import com.example.newninebank.model.TransactionModel
 import com.google.android.material.textview.MaterialTextView
 

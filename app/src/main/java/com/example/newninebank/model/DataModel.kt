@@ -4,7 +4,8 @@ import androidx.annotation.StringRes
 
 data class DataModel(
     @StringRes val name: Int,
-    var image: Int = 0
+    var image: Int = 0,
+    val route:String? = null
 )
 
 data class TransactionModel(

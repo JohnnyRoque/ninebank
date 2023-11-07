@@ -1,6 +1,7 @@
 package com.example.newninebank.model
 
 import com.example.newninebank.R
+import com.example.newninebank.util.Routes
 
 class DataSet {
     fun loadButtons(): List<DataModel> {
@@ -11,7 +12,7 @@ class DataSet {
             DataModel(R.string.bank_loan_text, R.drawable.paid_24px),
             DataModel(R.string.savings_text, R.drawable.savings_24px),
             DataModel(R.string.transfer_text, R.drawable.currency_exchange_24px),
-            DataModel(R.string.financial_statement, R.drawable.account_balance_24px),
+            DataModel(R.string.financial_statement, R.drawable.account_balance_24px,route = Routes.FINANCIAL_STATEMENT),
             DataModel(R.string.investments_text, R.drawable.monitoring_24px)
 
         )

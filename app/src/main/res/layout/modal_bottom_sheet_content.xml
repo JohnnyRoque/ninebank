@@ -7,7 +7,7 @@
 
 <variable
     name="recyclerAdapter"
-    type="com.example.newninebank.TypesOfAccountAdapter" />
+    type="com.example.newninebank.ui.open_account.TypesOfAccountAdapter" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat

@@ -1,20 +1,24 @@
-package com.example.newninebank
+package com.example.newninebank.ui.home_Fragment
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.newninebank.R
 import com.example.newninebank.model.DataModel
 import com.example.newninebank.model.DataSet
-import com.example.newninebank.ui.HomeFragmentDirections
+import com.example.newninebank.ui.TAG
+import com.example.newninebank.util.Routes
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
 
-class NineBankRecyclerView(val fragment:Fragment,private val context: Context, private val dataSet: List<DataModel> = DataSet().loadButtons()) :
-    RecyclerView.Adapter<NineBankRecyclerView.ViewHolder>() {
+class NineBankRecyclerView(
+    private val context: Context,
+    private val dataSet: List<DataModel> = DataSet().loadButtons(),
+    private val onClickNavigateDestination: (String) -> Unit
+) : RecyclerView.Adapter<NineBankRecyclerView.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val buttonName: MaterialTextView = view.findViewById(R.id.button_text)
@@ -33,14 +37,14 @@ class NineBankRecyclerView(val fragment:Fragment,private val context: Context, p
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataSet[position]
-        holder.buttonName.text = context.resources.getText(item.name)
+        holder.buttonName.text = context.resources.getString(item.name)
         holder.floatingActionButton.setImageResource(item.image)
         holder.floatingActionButton.setOnClickListener {
-            when (holder.buttonName.text){
-                context.resources.getStringArray(R.array.listOfFragments)[3]->{
-                    findNavController(fragment).navigate(HomeFragmentDirections.actionHomeFragmentToFinancialStatementFragment())
+            when (item.route) {
+                Routes.FINANCIAL_STATEMENT -> {
+                    Log.d(TAG,item.route)
+                    onClickNavigateDestination(Routes.FINANCIAL_STATEMENT)
                 }
-
             }
         }
     }

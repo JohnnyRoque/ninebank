@@ -12,15 +12,15 @@
 
         <variable
             name="buttonRecyclerAdapter"
-            type="com.example.newninebank.NineBankRecyclerView" />
+            type="com.example.newninebank.ui.home_Fragment.NineBankRecyclerView" />
 
         <variable
             name="textRecyclerAdapter"
-            type="com.example.newninebank.TextRecyclerView" />
+            type="com.example.newninebank.ui.home_Fragment.TextRecyclerView" />
 
         <variable
             name="benefitsRecyclerAdapter"
-            type="com.example.newninebank.TypesOfAccountAdapter" />
+            type="com.example.newninebank.ui.open_account.TypesOfAccountAdapter" />
 
         <variable
             name="navToFragmentName"
@@ -28,14 +28,14 @@
 
         <variable
             name="homeFragment"
-            type="com.example.newninebank.ui.HomeFragment" />
+            type="com.example.newninebank.ui.home_Fragment.HomeFragment" />
 
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.HomeFragment">
+        tools:context=".ui.home_Fragment.HomeFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_layout"
@@ -251,6 +251,8 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_view_benefits_headline"
+                android:padding="16dp"
+
                 android:layout_width="match_parent"
                 android:text="@string/benefits_text"
                 android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"

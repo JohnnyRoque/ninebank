@@ -1,18 +1,18 @@
-package com.example.newninebank
+package com.example.newninebank.ui.open_account
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.newninebank.R
+import com.example.newninebank.model.TypesOfAccount
 import com.example.newninebank.model.TypesOfAccountModel
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 
-class TypesOfAccountAdapter(val context: Context, private val modalBottomSheet: ModalBottomSheet) :
+class TypesOfAccountAdapter( private val onItemClick: (String) -> Unit) :
     RecyclerView.Adapter<TypesOfAccountAdapter.TypesOfAccountViewHolder>() {
     val typesAsyncDiff =
         AsyncListDiffer(this, object : DiffUtil.ItemCallback<TypesOfAccountModel>() {
@@ -34,7 +34,6 @@ class TypesOfAccountAdapter(val context: Context, private val modalBottomSheet: 
 
     class TypesOfAccountViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val accountTypeCard: MaterialCardView = view.findViewById(R.id.types_of_account_card)
         val accountTypeImage: ShapeableImageView = view.findViewById(R.id.type_of_account_image)
         val typeOfAccountTitle: MaterialTextView = view.findViewById(R.id.type_of_account_head)
         val typeOfAccountBody: MaterialTextView = view.findViewById(R.id.type_of_account_body)
@@ -56,17 +55,17 @@ class TypesOfAccountAdapter(val context: Context, private val modalBottomSheet: 
         holder.accountTypeImage.setImageResource(item.image)
         holder.typeOfAccountTitle.setText(item.titleText)
         holder.typeOfAccountBody.setText(item.bodyText)
-        holder.accountTypeCard.setOnClickListener {
+        holder.itemView.setOnClickListener {
+
             when (item.titleText) {
                 R.string.individual_account_title_text -> {
-                    modalBottomSheet.confirmTypeOfAccount(context.resources.getString(R.string.individual_account_title_text))
+                    onItemClick(TypesOfAccount.INDIVIDUAL_ACCOUNT)
                 }
-
                 R.string.teen_account_title_text -> {
-                    modalBottomSheet.confirmTypeOfAccount(context.resources.getString(R.string.teen_account_title_text))
+                    onItemClick(TypesOfAccount.TEEN_ACCOUNT)
                 }
 
-                R.string.joint_account_title_text -> { modalBottomSheet.confirmTypeOfAccount(context.resources.getString(R.string.joint_account_title_text))
+                R.string.joint_account_title_text -> { onItemClick(TypesOfAccount.JOINT_ACCOUNT)
 
                 }
             }

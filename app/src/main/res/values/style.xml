@@ -19,7 +19,6 @@
         <item name="bottomSheetStyle">@style/ModalBottomSheetStyle</item>
     </style>
 
-
     <style name="RoundCornerEditText">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">20dp</item>
@@ -30,9 +29,8 @@
 
 
     <style name="textStyle">
+        <item name="minHeight">18sp</item>
         <item name="fontFamily">@font/roboto_medium</item>
-        <item name="maxHeight">20sp</item>
-
     </style>
 
 

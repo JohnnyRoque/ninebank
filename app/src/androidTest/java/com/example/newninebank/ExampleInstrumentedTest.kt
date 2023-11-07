@@ -7,6 +7,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.newninebank.ui.MainActivity
+import com.example.newninebank.ui.open_account.TypesOfAccountAdapter
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

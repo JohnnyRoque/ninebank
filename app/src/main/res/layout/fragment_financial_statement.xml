@@ -11,13 +11,13 @@
 
         <variable
             name="transactionHistoryRecycler"
-            type="com.example.newninebank.TransactionHistoryRecycler" />
+            type="com.example.newninebank.ui.financial_statement.TransactionHistoryRecycler" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.FinancialStatementFragment">
+        tools:context=".ui.financial_statement.FinancialStatementFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_layout"

@@ -1,4 +1,4 @@
-package com.example.newninebank.ui
+package com.example.newninebank.ui.open_account
 
 import android.content.Context
 import android.os.Bundle
@@ -17,8 +17,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
-import com.example.newninebank.ChatRecyclerAdapter
-import com.example.newninebank.ModalBottomSheet
 import com.example.newninebank.R
 import com.example.newninebank.databinding.FragmentOpenAccountBinding
 import com.example.newninebank.model.NineBankViewModel
@@ -36,7 +34,8 @@ class OpenAccountFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
+
+        requireActivity().onBackPressedDispatcher.addCallback(this@OpenAccountFragment) {
             MaterialAlertDialogBuilder(requireContext()).apply {
                 setTitle(R.string.open_account_dialog_title)
                     .setMessage(R.string.open_account_dialog_message)
@@ -53,6 +52,7 @@ class OpenAccountFragment : Fragment() {
                     .show()
             }
         }
+
         super.onCreate(savedInstanceState)
 
     }

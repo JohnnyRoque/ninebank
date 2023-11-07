@@ -12,7 +12,7 @@
 
         <variable
             name="textRecyclerAdapter"
-            type="com.example.newninebank.ChatRecyclerAdapter" />
+            type="com.example.newninebank.ui.open_account.ChatRecyclerAdapter" />
 
         <variable
             name="inputText"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
 
         android:layout_height="match_parent"
-        tools:context=".ui.OpenAccountFragment">
+        tools:context=".ui.open_account.OpenAccountFragment">
 
 
         <androidx.recyclerview.widget.RecyclerView

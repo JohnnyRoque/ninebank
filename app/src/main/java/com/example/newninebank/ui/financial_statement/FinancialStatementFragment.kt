@@ -1,4 +1,4 @@
-package com.example.newninebank.ui
+package com.example.newninebank.ui.financial_statement
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,29 +7,41 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.newninebank.R
-import com.example.newninebank.databinding.FragmentEnterAccountBinding
+import com.example.newninebank.databinding.FragmentFinancialStatementBinding
 import com.example.newninebank.model.NineBankViewModel
 
-class EnterAccountFragment : Fragment() {
-    private var _binding: FragmentEnterAccountBinding? = null
-    private val binding get() = _binding!!
+
+
+
+class FinancialStatementFragment : Fragment() {
+    private var _binding: FragmentFinancialStatementBinding? = null
+    val binding get() = _binding!!
     private val sharedViewModel: NineBankViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_enter_account, container, false)
+        // Inflate the layout for this fragment
+        _binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_financial_statement,
+            container,
+            false
+        )
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            transactionHistoryRecycler = TransactionHistoryRecycler(sharedViewModel.transformList())
             viewModel = sharedViewModel
-            enterFragment = this@EnterAccountFragment
-            navToHomeFragment = resources.getStringArray(R.array.listOfFragments)[2]
-            navToOpenAccountFragment = resources.getStringArray(R.array.listOfFragments)[1]
+        }
+        binding.appbarFs.setNavigationOnClickListener {
+            findNavController().navigateUp()
         }
 
         super.onViewCreated(view, savedInstanceState)
@@ -38,4 +50,5 @@ class EnterAccountFragment : Fragment() {
         _binding = null
         super.onDestroyView()
     }
+
 }
